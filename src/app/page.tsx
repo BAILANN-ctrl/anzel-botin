@@ -1,65 +1,117 @@
-import Image from "next/image";
+"use client";
+
+import WorkStrip from "@/components/WorkStrip";
+import FlowField from "@/components/FlowField";
+import RevealText from "@/components/RevealText";
+import MagneticButton from "@/components/MagneticButton";
+import { projects } from "@/data/projects";
+import { useTypedCycle } from "@/hooks/useTypedCycle";
+
+const ROLES = ["software", "interfaces", "systems", "products"];
 
 export default function Home() {
+  const featured = projects.filter((p) => p.featured);
+  const typed = useTypedCycle({ words: ROLES });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div>
+      {/* Hero */}
+      <section className="relative min-h-[80vh] overflow-hidden px-6 pb-24 pt-24 md:px-10 md:pt-32">
+        <FlowField />
+        <div className="relative flex min-h-[calc(80vh-6rem)] flex-col justify-between">
+          <div>
+            <RevealText as="p" className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
+              Full-stack developer
+            </RevealText>
+
+            <RevealText
+              as="h1"
+              delay={80}
+              className="font-display mt-6 max-w-3xl text-5xl leading-[1.1] md:text-7xl"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              I build clean, considered
+              <br />
+              <span className="relative inline-flex items-baseline">
+                {typed}
+                <span
+                  aria-hidden
+                  className="ml-1 inline-block h-[0.9em] w-[2px] animate-pulse"
+                  style={{ background: "var(--ink)" }}
+                />
+              </span>
+              , end to end.
+            </RevealText>
+
+            <RevealText as="div" delay={160}>
+              <p className="mt-8 max-w-xl text-lg" style={{ color: "var(--muted)" }}>
+                Building production web applications with React, Next.js,
+                Node.js, and MySQL — from database architecture to deployment.
+                Currently open to new opportunities.
+              </p>
+            </RevealText>
+
+            <RevealText as="div" delay={240}>
+              <div className="mt-10 flex gap-4">
+                <MagneticButton
+                  href="/projects"
+                  className="rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                  style={{ background: "var(--ink)" }}
+                >
+                  View my work
+                </MagneticButton>
+                <MagneticButton
+                  href="/contact"
+                  className="rounded-full border px-6 py-3 text-sm font-medium transition-colors hover:border-[var(--ink)]"
+                  style={{ borderColor: "var(--border)" }}
+                >
+                  Get in touch
+                </MagneticButton>
+              </div>
+            </RevealText>
+          </div>
+
+          {/* Stat / stack row — fills hero, adds credibility density */}
+          <RevealText as="div" delay={320}>
+            <div
+              className="mt-16 flex flex-wrap gap-x-10 gap-y-4 border-t pt-6 text-xs uppercase tracking-widest md:mt-24"
+              style={{ borderColor: "var(--border)", color: "var(--muted)" }}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <span>React</span>
+              <span>Next.js</span>
+              <span>Node.js</span>
+              <span>MySQL</span>
+              <span>TypeScript</span>
+            </div>
+          </RevealText>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Signature scroll-pinned work strip */}
+      <WorkStrip projects={featured} />
+
+      {/* Closing CTA — the "standout" moment, gets its own tinted stage */}
+      <section
+        className="relative overflow-hidden px-6 py-32 text-center md:px-10"
+        style={{ background: "var(--surface, #f7f7f5)" }}
+      >
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <FlowField />
         </div>
-      </main>
+        <div className="relative">
+          <RevealText as="h2" className="font-display text-3xl md:text-4xl">
+            Have a role or project in mind?
+          </RevealText>
+          <div className="mt-8 flex justify-center">
+            <MagneticButton
+              href="/contact"
+              className="inline-block rounded-full px-8 py-4 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              style={{ background: "var(--ink)" }}
+            >
+              Let&apos;s talk →
+            </MagneticButton>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
