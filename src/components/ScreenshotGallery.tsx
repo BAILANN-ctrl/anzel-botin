@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, type MouseEvent } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import Lightbox from "./Lightbox";
@@ -34,7 +34,7 @@ export default function ScreenshotGallery({
 
   // Drag handler for mobile swipe
   const handleDragEnd = (
-    _: MouseEvent | TouchEvent,
+    _: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
     const threshold = 60;
