@@ -18,7 +18,7 @@ export const projects: Project[] = [
   name: "Studio Kosmos Website",
   oneLiner: "Full-stack booking platform replacing manual scheduling and photo delivery for a photography studio.",
   description:
-    "Designed and built a full-stack web platform to modernize Studio Kosmos's operations — solving slow bookings, delayed client responses, and manual scheduling. Implemented Google-based authentication, online payments, a booking calendar, and a secure client portal for digital photo delivery. Also built an admin dashboard with sales analytics and media management, plus a QR-code flow letting walk-in clients access their photos without an account.",
+    "Designed and built a full-stack web platform to modernize Studio Kosmos's operations, solving slow bookings, delayed client responses, and manual scheduling. Implemented Google-based authentication, online payments, a booking calendar, and a secure client portal for digital photo delivery. Also built an admin dashboard with sales analytics and media management, plus a QR-code flow letting walk-in clients access their photos without an account.",
   stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
   role: "Full-stack",
   featured: true,
@@ -46,7 +46,7 @@ export const projects: Project[] = [
   name: "Bicol SEPP System",
   oneLiner: "Full-stack platform for publishing the Bicol region's Socio-Economic and Physical Profile data.",
   description:
-    "Built full-stack — from MySQL schema to UI — for a system managing the Bicol Socio-Economic and Physical Profile across multiple time periods. Designed the database to accurately store and organize multi-year regional data, and built the frontend to present it clearly for public-facing access.",
+    "Built full-stack, from MySQL schema to Admin UI — for a system managing the Bicol Socio-Economic and Physical Profile across multiple time periods. Designed the database to accurately store and organize multi-year regional data, and built the frontend to present it clearly for public-facing access.",
   stack: ["React", "Node.js", "MySQL", "Full-stack Development"],
   role: "Full-stack",
   featured: true,

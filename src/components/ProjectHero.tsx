@@ -35,7 +35,7 @@ export default function ProjectHero({
 
   return (
     <section className="relative w-full">
-      <div className="relative w-full aspect-[2/1] md:aspect-[2.5/1] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] md:aspect-[2.5/1] overflow-hidden">
         {heroVideo ? (
           <video
             src={heroVideo}

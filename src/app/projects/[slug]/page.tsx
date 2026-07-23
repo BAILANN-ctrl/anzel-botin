@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { ArrowUpRight, GitFork } from "lucide-react";
 import { projects } from "@/data/projects";
 import ProjectHero from "@/components/ProjectHero";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
+import ScreenshotGallery from "@/components/ScreenshotGallery";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -26,11 +27,14 @@ export default async function ProjectDetail({
 
   return (
     <>
+      {/* ── Mobile reading progress bar ── */}
+      <ReadingProgressBar />
+
       {/* ── Full-width hero under navbar ── */}
       <ProjectHero hero={hero ?? null} heroVideo={project.heroVideo} projectName={project.name} description={project.oneLiner} />
 
       {/* ── Project info ── */}
-      <div className="mx-auto max-w-6xl pt-16 pb-8 md:pt-24 md:pb-12">
+      <div className="mx-auto max-w-6xl px-5 pt-16 pb-8 sm:px-6 md:pt-24 md:pb-12">
        <div className="max-w-3xl">
           <h1 className="font-display text-3xl leading-tight md:text-5xl">
             {project.name}
@@ -93,30 +97,7 @@ export default async function ProjectDetail({
 
           {/* ── Remaining screenshots ── */}
           {remaining.length > 0 && (
-            <div className="mt-14 md:mt-20">
-              <h2
-                className="mb-6 text-xs font-medium uppercase tracking-widest md:mb-8"
-                style={{ color: "var(--muted)" }}
-              >
-                More screenshots
-              </h2>
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-                {remaining.map((src, i) => (
-                  <div
-                    key={src}
-                    className="relative aspect-video overflow-hidden rounded-xl border"
-                    style={{ borderColor: "var(--border)" }}
-                  >
-                    <Image
-                      src={src}
-                      alt={`${project.name} screenshot ${hasHeroVideo ? i + 1 : i + 2}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <ScreenshotGallery images={remaining} projectName={project.name} />
           )}
       </div>
     </>
