@@ -50,7 +50,7 @@ export default function AboutPage() {
       </h1>
 
       <div
-        className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm"
+        className="mt-5 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-6"
         style={{ color: "var(--muted)" }}
       >
         <span className="inline-flex items-center gap-1.5">
@@ -132,7 +132,7 @@ export default function AboutPage() {
       {/* Skills */}
       <div className="mt-16">
         <h2 className="font-display text-2xl">Skills</h2>
-        <div className="mt-6 grid gap-8 sm:grid-cols-2">
+        <div className="mt-6 grid gap-8 grid-cols-1 sm:grid-cols-2">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category}>
               <h3

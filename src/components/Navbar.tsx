@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { X, Menu } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -13,6 +14,7 @@ const links = [
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
@@ -41,6 +43,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on route change via link click
+  const handleLinkClick = () => setMobileOpen(false);
+
   return (
     <header
       className="sticky top-0 z-40 border-b backdrop-blur-md transition-all duration-300 ease-out"
@@ -52,10 +57,12 @@ export default function Navbar() {
       }}
     >
       <nav className="flex w-full items-center justify-between px-6 py-5 md:px-10">
-        <Link href="/" className="font-display text-lg tracking-tight">
+        <Link href="/" className="font-display text-base tracking-tight sm:text-lg">
           Anzel Victor Botin
         </Link>
-        <div className="flex items-center gap-8 text-sm">
+
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-8 text-sm md:flex">
           {links.map((link, i) => (
             <Link
               key={link.href}
@@ -74,7 +81,45 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className="flex items-center justify-center md:hidden"
+          onClick={() => setMobileOpen((o) => !o)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          style={{ color: "var(--ink)" }}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </nav>
+
+      {/* Mobile slide-down menu */}
+      <div
+        className="overflow-hidden transition-all duration-300 ease-out md:hidden"
+        style={{
+          maxHeight: mobileOpen ? `${links.length * 56 + 24}px` : "0px",
+          opacity: mobileOpen ? 1 : 0,
+        }}
+      >
+        <div
+          className="flex flex-col gap-1 border-t px-6 pb-6 pt-4"
+          style={{ borderColor: "var(--border)" }}
+        >
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={handleLinkClick}
+              className="rounded-xl px-4 py-3 text-sm font-medium transition-colors"
+              style={{ color: "var(--muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--border)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
     </header>
   );
 }

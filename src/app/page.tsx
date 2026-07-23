@@ -1,7 +1,6 @@
 "use client";
 
 import WorkStrip from "@/components/WorkStrip";
-import FlowField from "@/components/FlowField";
 import RevealText from "@/components/RevealText";
 import MagneticButton from "@/components/MagneticButton";
 import { projects } from "@/data/projects";
@@ -16,8 +15,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-[80vh] overflow-hidden px-6 pb-24 pt-24 md:px-10 md:pt-32">
-        <FlowField />
+      <section className="relative min-h-[80vh] overflow-hidden px-6 pb-24 pt-16 md:px-10">
         <div className="relative flex min-h-[calc(80vh-6rem)] flex-col justify-between">
           <div>
             <RevealText as="p" className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
@@ -27,7 +25,7 @@ export default function Home() {
             <RevealText
               as="h1"
               delay={80}
-              className="font-display mt-6 max-w-3xl text-5xl leading-[1.1] md:text-7xl"
+              className="font-display mt-6 max-w-3xl text-4xl leading-[1.1] sm:text-5xl md:text-7xl"
             >
               I build clean, considered
               <br />
@@ -51,7 +49,7 @@ export default function Home() {
             </RevealText>
 
             <RevealText as="div" delay={240}>
-              <div className="mt-10 flex gap-4">
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton
                   href="/projects"
                   className="rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
@@ -91,11 +89,10 @@ export default function Home() {
 
       {/* Closing CTA — the "standout" moment, gets its own tinted stage */}
       <section
-        className="relative overflow-hidden px-6 py-32 text-center md:px-10"
+        className="relative overflow-hidden px-6 py-20 text-center md:px-10 md:py-32"
         style={{ background: "var(--surface, #f7f7f5)" }}
       >
         <div className="pointer-events-none absolute inset-0 opacity-40">
-          <FlowField />
         </div>
         <div className="relative">
           <RevealText as="h2" className="font-display text-3xl md:text-4xl">
