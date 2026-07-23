@@ -4,66 +4,73 @@ export interface Project {
   oneLiner: string;
   description: string;
   stack: string[];
-  role?: string; // e.g. "Full-stack", "Backend", "Frontend"
+  role?: string;
   liveUrl?: string;
   repoUrl?: string;
   featured?: boolean;
-  color: string; // accent color for the pinned strip panel
+  color: string;
+  images?: string[]; // paths under /public, e.g. "/projects/studio-kosmos/1.png"
+  heroVideo?: string; // path to a video file under /public, e.g. "/projects/my-project/demo.mp4"
 }
-
 export const projects: Project[] = [
+ {
+  slug: "studio-kosmos-website",
+  name: "Studio Kosmos Website",
+  oneLiner: "Full-stack booking platform replacing manual scheduling and photo delivery for a photography studio.",
+  description:
+    "Designed and built a full-stack web platform to modernize Studio Kosmos's operations — solving slow bookings, delayed client responses, and manual scheduling. Implemented Google-based authentication, online payments, a booking calendar, and a secure client portal for digital photo delivery. Also built an admin dashboard with sales analytics and media management, plus a QR-code flow letting walk-in clients access their photos without an account.",
+  stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
+  role: "Full-stack",
+  featured: true,
+  color: "#7A1F2B",
+  images: ["/projects/studio-kosmos/1.webp"],
+  heroVideo: "/projects/studio-kosmos/hero.mp4",
+},
   {
-    slug: "studio-kosmos-website",
-    name: "Studio Kosmos Website",
-    oneLiner: "Company website with a photo selection system built to replace a manual queue.",
-    description:
-      "Full-stack work on Studio Kosmos's website, including a photo selection system that digitized a manual queue workflow — cutting estimated customer wait time by 30–40%. Covers frontend UI, backend APIs, and MySQL database design.",
-    stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
-    role: "Full-stack",
-    featured: true,
-    color: "#7A1F2B", // deep garnet
-  },
+  slug: "library-management-system",
+  name: "Library Management Information System",
+  oneLiner: "Digital cataloging and access system built for a government library, replacing a fully manual, in-person-only process.",
+  description:
+    "Built during a Web Development internship with DEPDev Region V. Designed the backend and MySQL schema for a system handling cataloging, acquisitions, accessioning, user management, and reporting — replacing a library that had no digital record of its growing physical collection. Solved a real accessibility gap: staff and patrons previously had to visit in person to find or view any material.",
+  stack: ["Node.js", "MySQL", "Backend Development"],
+  role: "Backend",
+  featured: true,
+  color: "#0F3D3E",
+  images: ["/projects/lmis/lmis.webp"],
+},
   {
-    slug: "library-management-system",
-    name: "Library Management Information System",
-    oneLiner: "Admin panel for digitizing and publishing library archives.",
-    description:
-      "Built during a Web Development internship with the Department of Economy, Planning and Development. An admin panel for digital archiving that organizes storage and enables public accessibility of digitized library resources for preservation.",
-    stack: ["Node.js", "MySQL", "Backend Development"],
-    role: "Backend",
-    featured: true,
-    color: "#0F3D3E", // deep teal-ink
-  },
+  slug: "bicol-sepp-system",
+  name: "Bicol SEPP System",
+  oneLiner: "Full-stack platform for publishing the Bicol region's Socio-Economic and Physical Profile data.",
+  description:
+    "Built full-stack — from MySQL schema to UI — for a system managing the Bicol Socio-Economic and Physical Profile across multiple time periods. Designed the database to accurately store and organize multi-year regional data, and built the frontend to present it clearly for public-facing access.",
+  stack: ["React", "Node.js", "MySQL", "Full-stack Development"],
+  role: "Full-stack",
+  featured: true,
+  color: "#1E3A24",
+  images: [],
+},
   {
-    slug: "bicol-sepp-system",
-    name: "Bicol SEPP System",
-    oneLiner: "Regional development data platform for the Bicol Socio-Economic and Physical Profile.",
-    description:
-      "A system managing regional development data across different time periods, with structured data presentation for public-facing access. Includes MySQL database design supporting accurate storage, retrieval, and organization.",
-    stack: ["Node.js", "MySQL", "Backend Development"],
-    role: "Backend",
-    featured: true,
-    color: "#1E3A24", // deep forest
-  },
-  {
-    slug: "soulfm-website",
-    name: "SoulFM Website",
-    oneLiner: "Responsive UI for an online radio platform.",
-    description:
-      "Frontend build for SoulFM, an online radio platform, focused on a clean, responsive interface.",
-    stack: ["React", "Tailwind CSS"],
-    role: "Frontend",
-    featured: true,
-    color: "#3B2358", // deep violet-ink
-  },
+  slug: "soulfm-website",
+  name: "SoulFM Website",
+  oneLiner: "Radio platform with live audio streaming, event ticketing, and payments — built with a partner.",
+  description:
+    "Built with one other developer for SoulFM, an online radio station. Features a live streaming audio player, DJ and show schedule pages, and an event ticketing system with integrated payments, backed by an admin dashboard for managing content and sales. Handled [your specific pieces — frontend? payments? both?] across the stack.",
+  stack: ["React", "Tailwind CSS", "Node.js"],
+  role: "Full-stack",
+  featured: true,
+  color: "#3B2358",
+  images: [],
+},
   {
     slug: "spot-the-ai",
     name: "Spot The AI",
-    oneLiner: "Built for National Innovation Day 2026.",
+    oneLiner: "Full-stack web app testing how well people can tell AI content from real content — built for National Innovation Day 2026.",
     description:
-      "A web application developed for National Innovation Day 2026, exploring how well people can distinguish AI-generated content.",
+      "Built a full-stack web app for National Innovation Day 2026 that challenges users to distinguish AI-generated content from human-made content, exploring perception and media literacy in the age of generative AI.",
     stack: ["React", "Tailwind CSS", "HTML"],
     role: "Full-stack",
-    color: "#1C2541", // deep navy-ink
+    color: "#1C2541",
+    images: [],
   },
 ];
