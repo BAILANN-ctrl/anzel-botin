@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-[80vh] overflow-hidden px-6 pb-24 pt-16 md:px-10">
+      <section className="relative min-h-[80vh] overflow-hidden px-6 pt-8 md:px-10">
         <div className="relative flex min-h-[calc(80vh-6rem)] flex-col justify-between">
           <div>
             <RevealText as="p" className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
@@ -71,7 +71,7 @@ export default function Home() {
           {/* Stat / stack row — fills hero, adds credibility density */}
           <RevealText as="div" delay={320}>
             <div
-              className="mt-16 flex flex-wrap gap-x-10 gap-y-4 border-t pt-6 text-xs uppercase tracking-widest md:mt-24"
+              className="mt-10 flex flex-wrap gap-x-10 gap-y-4 border-t pt-6 text-xs uppercase tracking-widest"
               style={{ borderColor: "var(--border)", color: "var(--muted)" }}
             >
               <span>React</span>

@@ -4,6 +4,7 @@ export interface Project {
   oneLiner: string;
   description: string;
   stack: string[];
+  role?: string; // e.g. "Full-stack", "Backend", "Frontend"
   liveUrl?: string;
   repoUrl?: string;
   featured?: boolean;
@@ -18,8 +19,9 @@ export const projects: Project[] = [
     description:
       "Full-stack work on Studio Kosmos's website, including a photo selection system that digitized a manual queue workflow — cutting estimated customer wait time by 30–40%. Covers frontend UI, backend APIs, and MySQL database design.",
     stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
+    role: "Full-stack",
     featured: true,
-    color: "#3D5A80",
+    color: "#7A1F2B", // deep garnet
   },
   {
     slug: "library-management-system",
@@ -28,8 +30,9 @@ export const projects: Project[] = [
     description:
       "Built during a Web Development internship with the Department of Economy, Planning and Development. An admin panel for digital archiving that organizes storage and enables public accessibility of digitized library resources for preservation.",
     stack: ["Node.js", "MySQL", "Backend Development"],
+    role: "Backend",
     featured: true,
-    color: "#9C6644",
+    color: "#0F3D3E", // deep teal-ink
   },
   {
     slug: "bicol-sepp-system",
@@ -38,8 +41,9 @@ export const projects: Project[] = [
     description:
       "A system managing regional development data across different time periods, with structured data presentation for public-facing access. Includes MySQL database design supporting accurate storage, retrieval, and organization.",
     stack: ["Node.js", "MySQL", "Backend Development"],
+    role: "Backend",
     featured: true,
-    color: "#5B7553",
+    color: "#1E3A24", // deep forest
   },
   {
     slug: "soulfm-website",
@@ -48,8 +52,9 @@ export const projects: Project[] = [
     description:
       "Frontend build for SoulFM, an online radio platform, focused on a clean, responsive interface.",
     stack: ["React", "Tailwind CSS"],
+    role: "Frontend",
     featured: true,
-    color: "#84594E",
+    color: "#3B2358", // deep violet-ink
   },
   {
     slug: "spot-the-ai",
@@ -58,6 +63,7 @@ export const projects: Project[] = [
     description:
       "A web application developed for National Innovation Day 2026, exploring how well people can distinguish AI-generated content.",
     stack: ["React", "Tailwind CSS", "HTML"],
-    color: "#6B5B95",
+    role: "Full-stack",
+    color: "#1C2541", // deep navy-ink
   },
 ];
