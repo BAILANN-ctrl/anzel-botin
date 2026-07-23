@@ -18,7 +18,11 @@ export default async function ProjectDetail({
   if (!project) notFound();
 
   const images = project.images ?? [];
-  const [hero, ...remaining] = images;
+  // If there's a hero video, treat all images as screenshots.
+  // Otherwise, use the first image as the hero image and the rest as screenshots.
+  const hasHeroVideo = !!project.heroVideo;
+  const hero = hasHeroVideo ? null : images[0] ?? null;
+  const remaining = hasHeroVideo ? images : images.slice(1);
 
   return (
     <>
@@ -85,6 +89,8 @@ export default async function ProjectDetail({
             )}
           </div>
 
+        </div>
+
           {/* ── Remaining screenshots ── */}
           {remaining.length > 0 && (
             <div className="mt-14 md:mt-20">
@@ -94,7 +100,7 @@ export default async function ProjectDetail({
               >
                 More screenshots
               </h2>
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
                 {remaining.map((src, i) => (
                   <div
                     key={src}
@@ -103,7 +109,7 @@ export default async function ProjectDetail({
                   >
                     <Image
                       src={src}
-                      alt={`${project.name} screenshot ${i + 2}`}
+                      alt={`${project.name} screenshot ${hasHeroVideo ? i + 1 : i + 2}`}
                       fill
                       className="object-cover"
                     />
@@ -112,7 +118,6 @@ export default async function ProjectDetail({
               </div>
             </div>
           )}
-        </div>
       </div>
     </>
   );

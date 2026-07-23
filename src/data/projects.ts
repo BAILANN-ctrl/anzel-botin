@@ -23,7 +23,9 @@ export const projects: Project[] = [
   role: "Full-stack",
   featured: true,
   color: "#7A1F2B",
-  images: ["/projects/studio-kosmos/1.webp"],
+  images: ["/projects/studio-kosmos/1.webp",
+           "/projects/studio-kosmos/2.png",
+           "/projects/studio-kosmos/3.png",],
   heroVideo: "/projects/studio-kosmos/hero.mp4",
 },
   {
@@ -32,11 +34,12 @@ export const projects: Project[] = [
   oneLiner: "Digital cataloging and access system built for a government library, replacing a fully manual, in-person-only process.",
   description:
     "Built during a Web Development internship with DEPDev Region V. Designed the backend and MySQL schema for a system handling cataloging, acquisitions, accessioning, user management, and reporting — replacing a library that had no digital record of its growing physical collection. Solved a real accessibility gap: staff and patrons previously had to visit in person to find or view any material.",
-  stack: ["Node.js", "MySQL", "Backend Development"],
-  role: "Backend",
+  stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
+  role: "Full-stack",
   featured: true,
   color: "#0F3D3E",
-  images: ["/projects/lmis/lmis.webp"],
+  images: ["/projects/lmis/1.png","/projects/lmis/2.png","/projects/lmis/3.png"],
+  heroVideo: "/projects/lmis/hero.mp4",
 },
   {
   slug: "bicol-sepp-system",
