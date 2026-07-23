@@ -3,7 +3,7 @@ import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py- md:py-8">
+    <div className="mx-auto max-w-6.5xl px-8 py- md:py-8">
       <p className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
         Work
       </p>
