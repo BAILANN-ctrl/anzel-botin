@@ -51,7 +51,10 @@ export const projects: Project[] = [
   role: "Full-stack",
   featured: true,
   color: "#1E3A24",
-  images: [],
+  images: ["/projects/sepp/1.png",
+           "/projects/sepp/2.png",
+           "/projects/sepp/3.png",],
+  heroVideo: "/projects/sepp/hero.mp4",
 },
   {
   slug: "soulfm-website",
