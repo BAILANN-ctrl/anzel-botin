@@ -9,14 +9,12 @@ const links = [
   { href: "/projects", label: "Work" },
   { href: "/contact", label: "Contact" },
 ];
-
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
   const menuRef = useRef<HTMLDivElement>(null);
-
   // ── Scroll-based show/hide ──
   useEffect(() => {
     lastY.current = window.scrollY;
