@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-// Swap this for Resend, Postmark, or any email provider.
-// Docs: https://resend.com/docs/send-with-nextjs
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function POST(req: NextRequest) {
   try {
     const { name, email, message } = await req.json();
@@ -13,22 +14,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Example with Resend (requires RESEND_API_KEY env var + `npm install resend`):
-    //
-    // import { Resend } from "resend";
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: "portfolio@yourdomain.com",
-    //   to: "you@yourdomain.com",
-    //   subject: `New message from ${name}`,
-    //   replyTo: email,
-    //   text: message,
-    // });
+    const { error } = await resend.emails.send({
+      from: "Contact Form <onboarding@resend.dev>", // swap once your domain is verified
+      to: process.env.CONTACT_TO_EMAIL!,
+      subject: `New message from ${name}`,
+      replyTo: email,
+      text: `From: ${name} <${email}>\n\n${message}`,
+    });
 
-    console.log("Contact form submission:", { name, email, message });
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json(
+        { error: "Failed to send." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error("Contact form error:", err);
     return NextResponse.json(
       { error: "Something went wrong." },
       { status: 500 }
