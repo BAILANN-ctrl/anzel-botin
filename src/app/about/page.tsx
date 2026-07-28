@@ -1,20 +1,35 @@
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 
+function GitHubGlyph({ size = 15 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.82 1.18 3.08 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z" />
+    </svg>
+  );
+}
+
 const skills = {
-  Frontend: ["React", "Next.js", "Tailwind CSS"],
+  Frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
   Backend: ["Node.js", "REST API Development", "MySQL", "Database Design"],
+  Other: ["Python", ".NET"],
 };
 
 const experience = [
   {
-    role: "Web Developer",
-    org: "Studio Kosmos IT",
+    role: "IT Web Developer",
+    org: "Studio Kosmos",
     location: "Legazpi City, Albay",
     period: "March 2025 – Present",
     bullets: [
-      "Collaborate on the company website (React, Next.js, Tailwind CSS, Node.js, MySQL).",
-      "Independently built a photo selection system that digitized a manual queue workflow, cutting customer wait time by an estimated 30–40%.",
-      "Designed and managed MySQL databases and built backend APIs with Node.js.",
+      "Independently designed and shipped a photo-selection system that digitized a manual queue workflow, cutting customer wait time by an estimated 30–40%.",
+      "Built and maintain REST APIs in Node.js backing the company website (React, Next.js, Tailwind CSS), handling both feature work and bug fixes.",
+      "Designed and manage the MySQL schema powering the site, including data integrity and query performance for growing traffic.",
     ],
   },
   {
@@ -23,10 +38,9 @@ const experience = [
     location: "Legazpi City, Albay",
     period: "February 2026 – June 2026",
     bullets: [
-      "Focused on backend development for government information systems within the Development Research Division.",
-      "Contributed to a Library Management Information System (LMIS) with an admin panel for digital archiving, enabling organized storage and public access to digitized library resources.",
-      "Developed and supported a Bicol Socio-Economic and Physical Profile (SEPP) system managing regional development data across time periods, with structured public-facing data presentation.",
-      "Designed and managed MySQL databases to support accurate data storage, retrieval, and organization.",
+      "Developed the Library Management Information System (LMIS) admin panel, built to support digital archiving of 5,000+ books and publications, including handling large file sizes (80MB+) for high-resolution scanned materials.",
+      "Developed the Bicol Socio-Economic and Physical Profile (SEPP) system, presenting regional data from 2015–present across population, GDP/GRDP, labor force, employment, and income/expenditure statistics for public access.",
+      "Designed and managed MySQL databases supporting both systems, focused on accurate storage, retrieval, and organization of structured government data.",
     ],
   },
 ];
@@ -39,55 +53,84 @@ const certifications = [
   },
 ];
 
+// Reusable section shell: narrow label rail on the left (desktop),
+// content fills the remaining width. Falls back to stacked on mobile.
+function Section({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="border-t py-10 md:grid md:grid-cols-[180px_1fr] md:gap-10" style={{ borderColor: "var(--border, rgba(0,0,0,0.1))" }}>
+      <h2
+        className="font-display text-2xl md:sticky md:top-8 md:self-start"
+      >
+        {label}
+      </h2>
+      <div className="mt-6 md:mt-0">{children}</div>
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-24">
-      <p className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
-        About
-      </p>
-      <h1 className="font-display mt-4 text-4xl md:text-5xl">
-        Anzel Victor F. Botin
-      </h1>
+    <div className="mx-auto max-w-6xl px-6 py-8 md:px-10">
+      {/* Intro: two-column on desktop — name/bio left, contact chips right */}
+      <div className="grid gap-6 pb-10 md:grid-cols-[1fr_auto] md:items-start">
+        <div>
+          <p className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
+            About
+          </p>
+          <h1 className="font-display mt-4 text-4xl leading-tight md:text-5xl">
+            Full-stack developer, three years in production.
+          </h1>
+          <p className="mt-6 text-lg leading-relaxed md:max-w-xl" style={{ color: "var(--muted)" }}>
+            Shipped features end-to-end across React, Next.js, Node.js, and
+            MySQL — from database design to deployment — for a commercial
+            studio and a regional government office. Comfortable owning a
+            feature independently and communicating progress clearly.
+          </p>
+        </div>
 
-      <div
-        className="mt-5 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-6"
-        style={{ color: "var(--muted)" }}
-      >
-        <span className="inline-flex items-center gap-1.5">
-          <MapPin size={15} /> Albay, Philippines
-        </span>
-        <a
-          href="mailto:anzelbotin@gmail.com"
-          className="inline-flex items-center gap-1.5 hover:text-(--ink)"
+        <div
+          className="flex flex-wrap gap-x-5 gap-y-3 text-sm md:flex-col md:items-end md:text-right"
+          style={{ color: "var(--muted)" }}
         >
-          <Mail size={15} /> anzelbotin@gmail.com
-        </a>
-        <a
-          href="tel:+639274910531"
-          className="inline-flex items-center gap-1.5 hover:text-(--ink)"
-        >
-          <Phone size={15} /> +63 927 491 0531
-        </a>
-        <a
-          href="https://linkedin.com/in/anzelbotin"
-          className="inline-flex items-center gap-1.5 hover:text-(--ink)"
-        >
-          <ExternalLink size={15} /> LinkedIn
-        </a>
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+            <MapPin size={15} /> Albay, Philippines
+          </span>
+          <a
+            href="mailto:anzelbotin@gmail.com"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
+          >
+            <Mail size={15} /> anzelbotin@gmail.com
+          </a>
+          <a
+            href="tel:+639274910531"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
+          >
+            <Phone size={15} /> +63 927 491 0531
+          </a>
+          <a
+            href="https://linkedin.com/anzelbotin"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
+          >
+            <ExternalLink size={15} /> LinkedIn
+          </a>
+          <a
+            href="https://github.com/BAILANN-ctrl"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
+          >
+            <GitHubGlyph size={15} /> GitHub
+          </a>
+        </div>
       </div>
 
-      <p className="mt-8 max-w-xl text-lg leading-relaxed" style={{ color: "var(--muted)" }}>
-        Full-stack developer with hands-on experience building production web
-        applications using React, Next.js, Node.js, and MySQL. Proven ability
-        to independently design and ship full features, from database
-        architecture to deployment, with openness to growth across the
-        stack.
-      </p>
-
       {/* Experience */}
-      <div className="mt-16">
-        <h2 className="font-display text-2xl">Experience</h2>
-        <div className="mt-6 space-y-10">
+      <Section label="Experience">
+        <div className="space-y-10">
           {experience.map((job) => (
             <div key={job.role + job.org}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -112,27 +155,23 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </div>
+      </Section>
 
       {/* Education */}
-      <div className="mt-16">
-        <h2 className="font-display text-2xl">Education</h2>
-        <div className="mt-6">
-          <h3 className="font-medium">BS in Information Technology</h3>
-          <p className="text-sm" style={{ color: "var(--muted)" }}>
-            STI College Legazpi · GWA 1.69
-          </p>
-          <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-            Former President&apos;s Lister · National Finalist, Essay Does It
-            2024
-          </p>
-        </div>
-      </div>
+      <Section label="Education">
+        <h3 className="font-medium">BS in Information Technology</h3>
+        <p className="text-sm" style={{ color: "var(--muted)" }}>
+          STI College Legazpi
+        </p>
+        <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+          Former President&apos;s Lister · National Finalist, Essay Does It
+          2024
+        </p>
+      </Section>
 
       {/* Skills */}
-      <div className="mt-16">
-        <h2 className="font-display text-2xl">Skills</h2>
-        <div className="mt-6 grid gap-8 grid-cols-1 sm:grid-cols-2">
+      <Section label="Skills">
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-3">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category}>
               <h3
@@ -149,12 +188,11 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </div>
+      </Section>
 
       {/* Certifications */}
-      <div className="mt-16">
-        <h2 className="font-display text-2xl">Certifications</h2>
-        <div className="mt-6 space-y-4">
+      <Section label="Certifications">
+        <div className="space-y-4">
           {certifications.map((cert) => (
             <div key={cert.name}>
               <h3 className="font-medium">{cert.name}</h3>
@@ -167,11 +205,11 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-      </div>
+      </Section>
 
-      <div className="mt-16">
+      <div className="mt-12 border-t pt-10" style={{ borderColor: "var(--border, rgba(0,0,0,0.1))" }}>
         <a
-          href="/resume.pdf"
+          href="/Resume - Botin, Anzel Victor F.pdf"
           className="inline-block rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
           style={{ background: "var(--ink)" }}
         >

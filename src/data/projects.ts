@@ -18,9 +18,9 @@ export const projects: Project[] = [
   name: "Studio Kosmos Website",
   oneLiner: "Full-stack booking platform replacing manual scheduling and photo delivery for a photography studio.",
   description:
-    "Designed and built a full-stack web platform to modernize Studio Kosmos's operations, solving slow bookings, delayed client responses, and manual scheduling. Implemented Google-based authentication, online payments, a booking calendar, and a secure client portal for digital photo delivery. Also built an admin dashboard with sales analytics and media management, plus a QR-code flow letting walk-in clients access their photos without an account.",
+    "Spearheaded the production and full-stack development of a web platform to modernize Studio Kosmos's operations, built with a team to solve slow bookings, delayed client responses, and manual scheduling. Implemented Google-based authentication, online payments, a booking calendar, and a secure client portal for digital photo delivery. Also built an admin dashboard with sales analytics and media management, plus a QR-code flow letting walk-in clients access their photos without an account. Continue to build and maintain the REST APIs (Node.js) and manage the MySQL schema powering the site, focused on data integrity and query performance as traffic grows.",
   stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
-  role: "Full-stack",
+  role: "Full-stack Lead",
   featured: true,
   color: "#7A1F2B",
   images: ["/projects/studio-kosmos/1.webp",
@@ -29,13 +29,25 @@ export const projects: Project[] = [
   heroVideo: "/projects/studio-kosmos/hero.mp4",
 },
   {
+  slug: "studio-kosmos-photo-selection",
+  name: "Studio Kosmos Photo Selection System",
+  oneLiner: "Digitized manual photo-selection queue, cutting customer wait time by an estimated 30–40%.",
+  description:
+    "Independently designed and shipped a photo-selection system for Studio Kosmos, replacing a manual, in-person queue workflow. Digitizing the process cut estimated customer wait time by 30–40%, streamlining how clients review and select their photos.",
+  stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
+  role: "Solo Developer",
+  featured: false,
+  color: "#9C3B48",
+  images: [],
+},
+  {
   slug: "library-management-system",
   name: "Library Management Information System",
-  oneLiner: "Digital cataloging and access system built for a government library, replacing a fully manual, in-person-only process.",
+  oneLiner: "Admin panel for digital archiving of 5,000+ books and publications for a government library.",
   description:
-    "Built during a Web Development internship with DEPDev Region V. Designed the backend and MySQL schema for a system handling cataloging, acquisitions, accessioning, user management, and reporting — replacing a library that had no digital record of its growing physical collection. Solved a real accessibility gap: staff and patrons previously had to visit in person to find or view any material.",
+    "Built during a Web Development internship (OJT, Feb–Jun 2026) with the Dept. of Economy, Planning and Development (DEPDev Region V) — Development Research Division. Developed the LMIS admin panel to support digital archiving of 5,000+ books and publications, including handling large file sizes (80MB+) for high-resolution scanned materials. Designed and managed the MySQL database supporting cataloging, acquisitions, accessioning, user management, and reporting — replacing a library that had no digital record of its growing physical collection. Solved a real accessibility gap: staff and patrons previously had to visit in person to find or view any material.",
   stack: ["React", "Next.js", "Tailwind CSS", "Node.js", "MySQL"],
-  role: "Full-stack",
+  role: "Full-stack (Intern)",
   featured: true,
   color: "#0F3D3E",
   images: ["/projects/lmis/1.png","/projects/lmis/2.png","/projects/lmis/3.png"],
@@ -44,11 +56,11 @@ export const projects: Project[] = [
   {
   slug: "bicol-sepp-system",
   name: "Bicol SEPP System",
-  oneLiner: "Full-stack platform for publishing the Bicol region's Socio-Economic and Physical Profile data.",
+  oneLiner: "Full-stack platform publishing Bicol's Socio-Economic and Physical Profile data from 2015–present.",
   description:
-    "Built full-stack, from MySQL schema to Admin UI — for a system managing the Bicol Socio-Economic and Physical Profile across multiple time periods. Designed the database to accurately store and organize multi-year regional data, and built the frontend to present it clearly for public-facing access.",
+    "Built during a Web Development internship (OJT) with DEPDev Region V — Development Research Division. Developed full-stack, from MySQL schema to Admin UI, for a system presenting the Bicol Socio-Economic and Physical Profile from 2015 to present, covering population, GDP/GRDP, labor force, employment, and income/expenditure statistics for public access. Designed and managed the MySQL database to accurately store, retrieve, and organize structured government data across multiple years.",
   stack: ["React", "Node.js", "MySQL", "Full-stack Development"],
-  role: "Full-stack",
+  role: "Full-stack (Intern)",
   featured: true,
   color: "#1E3A24",
   images: ["/projects/sepp/1.png",
@@ -59,11 +71,11 @@ export const projects: Project[] = [
   {
   slug: "soulfm-website",
   name: "SoulFM Website",
-  oneLiner: "Radio platform with live audio streaming, event ticketing, and payments — built with a partner.",
+  oneLiner: "Live radio streaming platform with event ticketing and payment integration — built with a partner.",
   description:
-    "Built with one other developer for SoulFM, an online radio station. Features a live streaming audio player, DJ and show schedule pages, and an event ticketing system with integrated payments, backed by an admin dashboard for managing content and sales. Handled [your specific pieces — frontend? payments? both?] across the stack.",
+    "Built with one other developer for SoulFM, an online radio station. Features a live streaming audio player, DJ and show schedule pages, and an event ticketing system with integrated payments, backed by an admin panel for managing content and sales. Handled frontend development (React, Tailwind CSS) across the platform.",
   stack: ["React", "Tailwind CSS", "Node.js"],
-  role: "Full-stack",
+  role: "Frontend",
   featured: true,
   color: "#3B2358",
   images: [],
@@ -71,9 +83,9 @@ export const projects: Project[] = [
   {
     slug: "spot-the-ai",
     name: "Spot The AI",
-    oneLiner: "Full-stack web app testing how well people can tell AI content from real content — built for National Innovation Day 2026.",
+    oneLiner: "Quiz game challenging players to spot AI-tampered images vs. real ones — built for National Innovation Day 2026.",
     description:
-      "Built a full-stack web app for National Innovation Day 2026 that challenges users to distinguish AI-generated content from human-made content, exploring perception and media literacy in the age of generative AI.",
+      "Built a full-stack quiz game for National Innovation Day 2026 that challenges players to distinguish AI-tampered images from real ones, exploring perception and media literacy in the age of generative AI.",
     stack: ["React", "Tailwind CSS", "HTML"],
     role: "Full-stack",
     color: "#1C2541",
