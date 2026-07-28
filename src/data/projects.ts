@@ -50,7 +50,9 @@ export const projects: Project[] = [
   role: "Full-stack (Intern)",
   featured: true,
   color: "#0F3D3E",
-  images: ["/projects/lmis/1.png","/projects/lmis/2.png","/projects/lmis/3.png"],
+  images: ["/projects/lmis/1.png",
+           "/projects/lmis/2.png",
+           "/projects/lmis/3.png"],
   heroVideo: "/projects/lmis/hero.mp4",
 },
   {
@@ -78,7 +80,10 @@ export const projects: Project[] = [
   role: "Frontend",
   featured: true,
   color: "#3B2358",
-  images: [],
+    images: ["/projects/soulfm/1.png",
+           "/projects/soulfm/2.png",
+           "/projects/soulfm/3.png",],
+  heroVideo: "/projects/soulfm/hero.mp4",
 },
   {
     slug: "spot-the-ai",
