@@ -1,21 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
 
-    const form = new FormData(e.currentTarget);
+    const form = formRef.current;
+    if (!form) return;
+
+    const formData = new FormData(form);
     const payload = {
-      name: form.get("name"),
-      email: form.get("email"),
-      message: form.get("message"),
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
     };
 
     try {
@@ -24,10 +28,18 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error();
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        console.error("Contact form failed:", res.status, body);
+        setStatus("error");
+        return;
+      }
+
       setStatus("sent");
-      e.currentTarget.reset();
-    } catch {
+      form.reset();
+    } catch (err) {
+      console.error("Contact form network error:", err);
       setStatus("error");
     }
   }
@@ -39,7 +51,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label htmlFor="name" className="text-sm" style={{ color: "var(--muted)" }}>
           Name
@@ -48,8 +60,9 @@ export default function ContactForm() {
           id="name"
           name="name"
           required
-          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm focus:outline-none"
-          style={inputStyle}
+          disabled={status === "sending"}
+          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
         />
       </div>
 
@@ -62,8 +75,9 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
-          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm focus:outline-none"
-          style={inputStyle}
+          disabled={status === "sending"}
+          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
         />
       </div>
 
@@ -76,30 +90,37 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm focus:outline-none"
-          style={inputStyle}
+          disabled={status === "sending"}
+          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+          style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-        style={{ background: "var(--ink)" }}
-      >
-        {status === "sending" ? "Sending..." : "Send message →"}
-      </button>
+      <div className="flex items-center gap-4">
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+          style={{ background: "var(--ink)" }}
+        >
+          {status === "sending" ? "Sending…" : "Send message →"}
+        </button>
 
-      {status === "sent" && (
-        <p className="text-sm" style={{ color: "var(--accent)" }}>
-          Message sent. I&apos;ll get back to you soon.
-        </p>
-      )}
-      {status === "error" && (
-        <p className="text-sm" style={{ color: "#993C1D" }}>
-          Something went wrong — try emailing me directly instead.
-        </p>
-      )}
+        {status === "sent" && (
+          <p className="text-sm" style={{ color: "var(--accent)" }} role="status">
+            Sent — I&apos;ll reply within a day or two.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-sm" style={{ color: "#993C1D" }} role="alert">
+            Didn&apos;t go through. Email me directly at{" "}
+            <a href="mailto:you@example.com" className="underline">
+              you@example.com
+            </a>
+            .
+          </p>
+        )}
+      </div>
     </form>
   );
 }
