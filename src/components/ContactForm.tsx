@@ -51,49 +51,54 @@ export default function ContactForm() {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-      <div>
-        <label htmlFor="name" className="text-sm" style={{ color: "var(--muted)" }}>
-          Name
-        </label>
-        <input
-          id="name"
-          name="name"
-          required
-          disabled={status === "sending"}
-          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
-          style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
-        />
-      </div>
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        {/* Left column: Name + Email */}
+        <div className="space-y-5">
+          <div>
+            <label htmlFor="name" className="text-sm" style={{ color: "var(--muted)" }}>
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              required
+              disabled={status === "sending"}
+              className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+              style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
+            />
+          </div>
 
-      <div>
-        <label htmlFor="email" className="text-sm" style={{ color: "var(--muted)" }}>
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          disabled={status === "sending"}
-          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
-          style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
-        />
-      </div>
+          <div>
+            <label htmlFor="email" className="text-sm" style={{ color: "var(--muted)" }}>
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              disabled={status === "sending"}
+              className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+              style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
+            />
+          </div>
+        </div>
 
-      <div>
-        <label htmlFor="message" className="text-sm" style={{ color: "var(--muted)" }}>
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={5}
-          disabled={status === "sending"}
-          className="mt-2 w-full rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
-          style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
-        />
+        {/* Right column: Message */}
+        <div className="flex flex-col">
+          <label htmlFor="message" className="text-sm" style={{ color: "var(--muted)" }}>
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            disabled={status === "sending"}
+            className="mt-2 w-full flex-1 rounded-xl border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2"
+            style={{ ...inputStyle, ["--tw-ring-color" as string]: "var(--accent)" }}
+          />
+        </div>
       </div>
 
       <div className="flex items-center gap-4">

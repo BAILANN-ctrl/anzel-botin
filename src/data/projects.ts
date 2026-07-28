@@ -27,6 +27,7 @@ export const projects: Project[] = [
            "/projects/studio-kosmos/2.png",
            "/projects/studio-kosmos/3.png",],
   heroVideo: "/projects/studio-kosmos/hero.mp4",
+  liveUrl: "https://www.studiokosmos.me"
 },
   {
   slug: "studio-kosmos-photo-selection",
@@ -87,6 +88,7 @@ export const projects: Project[] = [
            "/projects/soulfm/2.png",
            "/projects/soulfm/3.png",],
   heroVideo: "/projects/soulfm/hero.mp4",
+  liveUrl: "https://www.soulfmlive.com",
 },
   {
     slug: "spot-the-ai",
@@ -101,5 +103,6 @@ export const projects: Project[] = [
            "/projects/ai-or-real/2.png",
            "/projects/ai-or-real/3.png",],
     heroVideo: "/projects/ai-or-real/hero.mp4",
+    repoUrl: "https://github.com/BAILANN-ctrl/spot-the-ai"
   },
 ];

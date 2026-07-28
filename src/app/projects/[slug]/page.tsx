@@ -88,7 +88,7 @@ export default async function ProjectDetail({
                 className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm text-white transition-opacity hover:opacity-90"
                 style={{ background: "var(--ink)" }}
               >
-                <ArrowUpRight size={16} /> Live demo
+                <ArrowUpRight size={16} /> Link
               </a>
             )}
           </div>
