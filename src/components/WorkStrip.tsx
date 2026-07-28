@@ -235,7 +235,7 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
           aria-hidden="true"
         >
           <div className="flex items-center gap-2 text-xs uppercase tracking-widest" style={{ color: "var(--muted)" }}>
-            <span>Scroll</span>
+            <span>SCROLL DOWN</span>
             <ArrowUpRight size={12} className="rotate-45" />
           </div>
           <div className="h-1 w-40 overflow-hidden rounded-full bg-white/15 md:w-56">

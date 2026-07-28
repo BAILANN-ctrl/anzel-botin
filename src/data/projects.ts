@@ -38,7 +38,10 @@ export const projects: Project[] = [
   role: "Solo Developer",
   featured: false,
   color: "#9C3B48",
-  images: [],
+    images: ["/projects/kosmospickr/1.png",
+           "/projects/kosmospickr/2.png",
+           "/projects/kosmospickr/3.png"],
+  heroVideo: "/projects/kosmospickr/hero.mp4",
 },
   {
   slug: "library-management-system",
@@ -94,6 +97,9 @@ export const projects: Project[] = [
     stack: ["React", "Tailwind CSS", "HTML"],
     role: "Full-stack",
     color: "#1C2541",
-    images: [],
+    images: ["/projects/ai-or-real/1.png",
+           "/projects/ai-or-real/2.png",
+           "/projects/ai-or-real/3.png",],
+    heroVideo: "/projects/ai-or-real/hero.mp4",
   },
 ];
