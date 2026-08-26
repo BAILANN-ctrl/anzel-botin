@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 
 const links = [
   { href: "/", label: "Home" },
@@ -15,34 +16,28 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
   const menuRef = useRef<HTMLDivElement>(null);
-  // ── Scroll-based show/hide ──
-  useEffect(() => {
-    lastY.current = window.scrollY;
 
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-      const diff = currentY - lastY.current;
+  const { scrollY } = useScroll();
 
-      setScrolled(currentY > 20);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const currentY = latest;
+    const diff = currentY - lastY.current;
 
-      if (Math.abs(diff) < 8) return;
+    setScrolled(currentY > 20);
 
-      if (currentY < 80) {
-        setHidden(false);
-      } else if (diff > 0) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
+    if (Math.abs(diff) < 8) return;
 
-      lastY.current = currentY;
-    };
+    if (currentY < 80) {
+      setHidden(false);
+    } else if (diff > 0) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    lastY.current = currentY;
+  });
 
-  // ── Body scroll lock / Escape key ──
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -64,7 +59,6 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  // ── Close menu when window resizes past md breakpoint ──
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768) setMenuOpen(false);
@@ -79,10 +73,10 @@ export default function Navbar() {
     <header
       className="sticky top-0 z-40 border-b backdrop-blur-md transition-all duration-300 ease-out"
       style={{
-        borderColor: "var(--border)",
-        background: "rgba(250, 250, 247, 0.85)",
+        borderColor: scrolled ? "var(--border)" : "transparent",
+        background: scrolled ? "rgba(250, 249, 246, 0.85)" : "rgba(250, 249, 246, 0)",
         transform: hidden ? "translateY(-100%)" : "translateY(0)",
-        boxShadow: scrolled ? "0 8px 24px -12px rgba(0, 0, 0, 0.12)" : "0 0 0 rgba(0,0,0,0)",
+        boxShadow: scrolled ? "0 1px 0 var(--border)" : "0 0 0 rgba(0,0,0,0)",
       }}
     >
       <nav className="flex w-full items-center justify-between px-6 py-5 md:px-10">
@@ -101,7 +95,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="group relative py-1 animate-nav-in transition-colors duration-500 ease-out hover:text-(--accent)"
+              className="group relative py-1 animate-nav-in transition-colors duration-300 ease-out hover:text-[var(--ink)]"
               style={{
                 color: "var(--muted)",
                 animationDelay: `${i * 60}ms`,
@@ -109,7 +103,7 @@ export default function Navbar() {
             >
               {link.label}
               <span
-                className="absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-700 ease-out group-hover:w-full"
+                className="absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-300 ease-out group-hover:w-full"
                 style={{ background: "var(--accent)" }}
               />
             </Link>
@@ -168,7 +162,7 @@ export default function Navbar() {
         <div
           className="absolute inset-0 transition-opacity duration-300 ease-out"
           style={{
-            background: "rgba(250, 250, 247, 0.97)",
+            background: "rgba(250, 249, 246, 0.97)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
             opacity: menuOpen ? 1 : 0,
@@ -189,12 +183,12 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="w-full text-center transition-all duration-500 ease-out hover:text-(--accent)"
+              className="w-full text-center transition-all duration-500 ease-out hover:text-[var(--accent)]"
               style={{
                 color: "var(--muted)",
                 padding: "0.875rem 0",
                 fontSize: "1.25rem",
-                fontFamily: "var(--font-fraunces), Georgia, serif",
+                fontFamily: "var(--font-geist), system-ui, sans-serif",
                 transform: menuOpen
                   ? "translateY(0)"
                   : "translateY(-12px)",

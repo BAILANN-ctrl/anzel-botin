@@ -1,4 +1,7 @@
+"use client";
+
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import RevealText from "@/components/RevealText";
 
 function GitHubGlyph({ size = 15 }: { size?: number }) {
   return (
@@ -25,21 +28,21 @@ const experience = [
     role: "IT Web Developer",
     org: "Studio Kosmos",
     location: "Legazpi City, Albay",
-    period: "March 2025 – Present",
+    period: "March 2025 - Present",
     bullets: [
-      "Independently designed and shipped a photo-selection system that digitized a manual queue workflow, cutting customer wait time by an estimated 30–40%.",
+      "Independently designed and shipped a photo-selection system that digitized a manual queue workflow, cutting customer wait time by an estimated 30-40%.",
       "Built and maintain REST APIs in Node.js backing the company website (React, Next.js, Tailwind CSS), handling both feature work and bug fixes.",
       "Designed and manage the MySQL schema powering the site, including data integrity and query performance for growing traffic.",
     ],
   },
   {
     role: "Web Development Intern (OJT)",
-    org: "Department of Economy, Planning and Development — Development Research Division",
+    org: "Department of Economy, Planning and Development - Development Research Division",
     location: "Legazpi City, Albay",
-    period: "February 2026 – June 2026",
+    period: "February 2026 - June 2026",
     bullets: [
       "Developed the Library Management Information System (LMIS) admin panel, built to support digital archiving of 5,000+ books and publications, including handling large file sizes (80MB+) for high-resolution scanned materials.",
-      "Developed the Bicol Socio-Economic and Physical Profile (SEPP) system, presenting regional data from 2015–present across population, GDP/GRDP, labor force, employment, and income/expenditure statistics for public access.",
+      "Developed the Bicol Socio-Economic and Physical Profile (SEPP) system, presenting regional data from 2015-present across population, GDP/GRDP, labor force, employment, and income/expenditure statistics for public access.",
       "Designed and managed MySQL databases supporting both systems, focused on accurate storage, retrieval, and organization of structured government data.",
     ],
   },
@@ -49,12 +52,10 @@ const certifications = [
   {
     name: "SAP S/4HANA Fundamentals (Global Bike)",
     issuer: "SAP University Alliances",
-    detail: "Modules: SD, MM, PP, FI, CO — February to June 2024",
+    detail: "Modules: SD, MM, PP, FI, CO - February to June 2024",
   },
 ];
 
-// Reusable section shell: narrow label rail on the left (desktop),
-// content fills the remaining width. Falls back to stacked on mobile.
 function Section({
   label,
   children,
@@ -63,10 +64,11 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-t py-10 md:grid md:grid-cols-[180px_1fr] md:gap-10" style={{ borderColor: "var(--border, rgba(0,0,0,0.1))" }}>
-      <h2
-        className="font-display text-2xl md:sticky md:top-8 md:self-start"
-      >
+    <div
+      className="border-t py-12 md:grid md:grid-cols-[180px_1fr] md:gap-10"
+      style={{ borderColor: "var(--border)" }}
+    >
+      <h2 className="font-display text-2xl md:sticky md:top-8 md:self-start">
         {label}
       </h2>
       <div className="mt-6 md:mt-0">{children}</div>
@@ -77,55 +79,61 @@ function Section({
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-8 md:px-10">
-      {/* Intro: two-column on desktop — name/bio left, contact chips right */}
+      {/* Intro */}
       <div className="grid gap-6 pb-10 md:grid-cols-[1fr_auto] md:items-start">
         <div>
-          <p className="text-sm uppercase tracking-widest" style={{ color: "var(--muted)" }}>
+          <RevealText
+            as="p"
+            className="text-xs font-medium uppercase tracking-[0.2em]"
+            style={{ color: "var(--accent)" }}
+          >
             About
-          </p>
-          <h1 className="font-display mt-4 text-4xl leading-tight md:text-5xl">
+          </RevealText>
+          <RevealText as="h1" delay={80} className="font-display mt-4 text-4xl leading-tight md:text-5xl">
             Full-stack developer, three years in production.
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed md:max-w-xl" style={{ color: "var(--muted)" }}>
+          </RevealText>
+          <RevealText as="p" delay={160} className="mt-6 text-lg leading-relaxed md:max-w-xl" style={{ color: "var(--muted)" }}>
             Shipped features end-to-end across React, Next.js, Node.js, and
-            MySQL — from database design to deployment — for a commercial
+            MySQL - from database design to deployment - for a commercial
             studio and a regional government office. Comfortable owning a
             feature independently and communicating progress clearly.
-          </p>
+          </RevealText>
         </div>
 
-        <div
-          className="flex flex-wrap gap-x-5 gap-y-3 text-sm md:flex-col md:items-end md:text-right"
-          style={{ color: "var(--muted)" }}
-        >
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-            <MapPin size={15} /> Albay, Philippines
-          </span>
-          <a
-            href="mailto:anzelbotin@gmail.com"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
+        <RevealText as="div" delay={240}>
+          <div
+            className="flex flex-wrap gap-x-5 gap-y-3 text-sm md:flex-col md:items-end md:text-right"
+            style={{ color: "var(--muted)" }}
           >
-            <Mail size={15} /> anzelbotin@gmail.com
-          </a>
-          <a
-            href="tel:+639274910531"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
-          >
-            <Phone size={15} /> +63 927 491 0531
-          </a>
-          <a
-            href="https://linkedin.com/anzelbotin"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
-          >
-            <ExternalLink size={15} /> LinkedIn
-          </a>
-          <a
-            href="https://github.com/BAILANN-ctrl"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-(--ink)"
-          >
-            <GitHubGlyph size={15} /> GitHub
-          </a>
-        </div>
+            <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+              <MapPin size={15} /> Albay, Philippines
+            </span>
+            <a
+              href="mailto:anzelbotin@gmail.com"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+            >
+              <Mail size={15} /> anzelbotin@gmail.com
+            </a>
+            <a
+              href="tel:+639274910531"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+            >
+              <Phone size={15} /> +63 927 491 0531
+            </a>
+            <a
+              href="https://linkedin.com/in/anzelbotin"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+            >
+              <ExternalLink size={15} /> LinkedIn
+            </a>
+            <a
+              href="https://github.com/BAILANN-ctrl"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+            >
+              <GitHubGlyph size={15} /> GitHub
+            </a>
+          </div>
+        </RevealText>
       </div>
 
       {/* Experience */}
@@ -135,7 +143,7 @@ export default function AboutPage() {
             <div key={job.role + job.org}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-medium">
-                  {job.role} · {job.org}
+                  {job.role} <span style={{ color: "var(--accent)" }}>/</span> {job.org}
                 </h3>
                 <span className="text-sm" style={{ color: "var(--muted)" }}>
                   {job.period}
@@ -164,7 +172,7 @@ export default function AboutPage() {
           STI College Legazpi
         </p>
         <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-          Former President&apos;s Lister · National Finalist, Essay Does It
+          Former President&apos;s Lister <span style={{ color: "var(--accent)" }}>/</span> National Finalist, Essay Does It
           2024
         </p>
       </Section>
@@ -175,8 +183,8 @@ export default function AboutPage() {
           {Object.entries(skills).map(([category, items]) => (
             <div key={category}>
               <h3
-                className="text-xs font-medium uppercase tracking-wide"
-                style={{ color: "var(--muted)" }}
+                className="text-xs font-medium uppercase tracking-[0.15em]"
+                style={{ color: "var(--accent)" }}
               >
                 {category}
               </h3>
@@ -207,13 +215,19 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <div className="mt-12 border-t pt-10" style={{ borderColor: "var(--border, rgba(0,0,0,0.1))" }}>
+      <div className="mt-12 border-t pt-10" style={{ borderColor: "var(--border)" }}>
         <a
           href="/Resume - Botin, Anzel Victor F.pdf"
-          className="inline-block rounded-full px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-          style={{ background: "var(--ink)" }}
+          className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg"
+          style={{
+            background: "var(--accent)",
+            boxShadow: "0 4px 24px -4px var(--accent)",
+          }}
         >
-          Download resume →
+          Download resume
+          <span className="inline-block transition-transform group-hover:translate-x-0.5">
+            &rarr;
+          </span>
         </a>
       </div>
     </div>

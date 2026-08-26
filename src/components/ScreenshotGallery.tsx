@@ -53,8 +53,8 @@ export default function ScreenshotGallery({
   return (
     <div className="mt-14 md:mt-20">
       <h2
-        className="mb-6 text-xs font-medium uppercase tracking-widest md:mb-8"
-        style={{ color: "var(--muted)" }}
+        className="mb-6 text-xs font-medium uppercase tracking-[0.2em] md:mb-8"
+        style={{ color: "var(--accent)" }}
       >
         More screenshots
       </h2>
@@ -120,7 +120,7 @@ export default function ScreenshotGallery({
                   width: i === mobileIndex ? 24 : 8,
                   height: 8,
                   background:
-                    i === mobileIndex ? "var(--ink)" : "var(--border)",
+                    i === mobileIndex ? "var(--accent)" : "var(--border)",
                 }}
                 aria-label={`Go to screenshot ${i + 1}`}
               />

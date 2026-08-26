@@ -19,24 +19,29 @@ export default async function ProjectDetail({
   if (!project) notFound();
 
   const images = project.images ?? [];
-  // If there's a hero video, treat all images as screenshots.
-  // Otherwise, use the first image as the hero image and the rest as screenshots.
   const hasHeroVideo = !!project.heroVideo;
   const hero = hasHeroVideo ? null : images[0] ?? null;
   const remaining = hasHeroVideo ? images : images.slice(1);
 
   return (
     <>
-      {/* ── Mobile reading progress bar ── */}
       <ReadingProgressBar />
 
-      {/* ── Full-width hero under navbar ── */}
-      <ProjectHero hero={hero ?? null} heroVideo={project.heroVideo} projectName={project.name} description={project.oneLiner} />
+      <ProjectHero
+        hero={hero ?? null}
+        heroVideo={project.heroVideo}
+        projectName={project.name}
+      />
 
-      {/* ── Project info ── */}
       <div className="mx-auto max-w-6xl px-5 pt-16 pb-8 sm:px-6 md:pt-24 md:pb-12">
-       <div className="max-w-3xl">
-          <h1 className="font-display text-3xl leading-tight md:text-5xl">
+        <div className="max-w-3xl">
+          <p
+            className="text-xs font-medium uppercase tracking-[0.2em]"
+            style={{ color: "var(--accent)" }}
+          >
+            {project.role ?? "Project"}
+          </p>
+          <h1 className="font-display mt-3 text-3xl leading-tight md:text-5xl">
             {project.name}
           </h1>
 
@@ -74,7 +79,7 @@ export default async function ProjectDetail({
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm transition-colors hover:border-[var(--ink)]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-sm transition-all hover:border-[var(--ink)]"
                 style={{ borderColor: "var(--border)" }}
               >
                 <GitFork size={16} /> Source
@@ -85,20 +90,24 @@ export default async function ProjectDetail({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm text-white transition-opacity hover:opacity-90"
-                style={{ background: "var(--ink)" }}
+                className="group inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm text-white transition-all hover:scale-[1.02] hover:shadow-lg"
+                style={{
+                  background: "var(--accent)",
+                  boxShadow: "0 4px 24px -4px var(--accent)",
+                }}
               >
-                <ArrowUpRight size={16} /> Link
+                <ArrowUpRight size={16} /> Visit site
+                <span className="inline-block transition-transform group-hover:translate-x-0.5">
+                  &rarr;
+                </span>
               </a>
             )}
           </div>
-
         </div>
 
-          {/* ── Remaining screenshots ── */}
-          {remaining.length > 0 && (
-            <ScreenshotGallery images={remaining} projectName={project.name} />
-          )}
+        {remaining.length > 0 && (
+          <ScreenshotGallery images={remaining} projectName={project.name} />
+        )}
       </div>
     </>
   );

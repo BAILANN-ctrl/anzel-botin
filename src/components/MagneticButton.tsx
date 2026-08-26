@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import type { ReactNode, MouseEvent as ReactMouseEvent } from "react";
 
 export default function MagneticButton({
@@ -17,24 +18,29 @@ export default function MagneticButton({
   strength?: number;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
   const onMouseMove = (e: ReactMouseEvent<HTMLAnchorElement>) => {
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+    const offsetX = e.clientX - rect.left - rect.width / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
+    x.set(offsetX * strength);
+    y.set(offsetY * strength);
   };
 
   const onMouseLeave = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.transform = "translate(0, 0)";
+    x.set(0);
+    y.set(0);
   };
 
   return (
-    <a
+    <motion.a
       ref={ref}
       href={href}
       data-cursor-hover
@@ -44,10 +50,11 @@ export default function MagneticButton({
       style={{
         ...style,
         display: "inline-block",
-        transition: "transform 0.15s ease-out",
+        x: springX,
+        y: springY,
       }}
     >
       {children}
-    </a>
+    </motion.a>
   );
 }

@@ -65,8 +65,11 @@ export function useTypedCycle({
         );
         return () => clearTimeout(t);
       }
-      setIndex((i) => (i + 1) % words.length);
-      setPhase("typing");
+      // Defer state updates to avoid synchronous setState in effect
+      queueMicrotask(() => {
+        setIndex((i) => (i + 1) % words.length);
+        setPhase("typing");
+      });
     }
   }, [phase, text, index, words, typingSpeed, deletingSpeed, pauseMs]);
 
