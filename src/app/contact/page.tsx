@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-xl md:max-w-3xl lg:max-w-4xl px-6 py-16 md:py-24">
+    <div className="mx-auto max-w-xl md:max-w-3xl lg:max-w-4xl px-6 py-8 md:py-8">
       <div className="max-w-xl">
         <RevealText
           as="p"
