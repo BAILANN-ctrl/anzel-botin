@@ -97,9 +97,6 @@ export default async function ProjectDetail({
                 }}
               >
                 <ArrowUpRight size={16} /> Visit site
-                <span className="inline-block transition-transform group-hover:translate-x-0.5">
-                  &rarr;
-                </span>
               </a>
             )}
           </div>
