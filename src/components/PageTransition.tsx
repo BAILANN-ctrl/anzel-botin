@@ -15,7 +15,7 @@ const variants = {
     filter: "blur(0px)",
     transition: {
       duration: 0.5,
-      ease: [0.32, 0.72, 0, 1],
+      ease: [0.32, 0.72, 0, 1] as const,
     },
   },
   exit: {
@@ -24,7 +24,7 @@ const variants = {
     filter: "blur(4px)",
     transition: {
       duration: 0.3,
-      ease: [0.32, 0.72, 0, 1],
+      ease: [0.32, 0.72, 0, 1] as const,
     },
   },
 };
