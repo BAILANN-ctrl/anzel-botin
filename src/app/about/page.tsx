@@ -58,9 +58,9 @@ const certifications = [
 
 export default function AboutPage() {
   return (
-    <div className="px-6 pt-28 pb-8 md:px-14 md:pt-32 lg:px-20">
+    <div className="px-4 pt-24 pb-6 sm:px-6 md:px-14 md:pt-32 lg:px-20">
       {/* Intro — full-bleed, asymmetric split */}
-      <div className="pb-20 md:pb-28">
+      <div className="pb-10 sm:pb-16 md:pb-28">
         <RevealText
           as="h1"
           delay={0}
@@ -70,7 +70,7 @@ export default function AboutPage() {
           <br />
           three years in production.
         </RevealText>
-        <div className="mt-10 grid gap-10 md:grid-cols-[2fr_1fr]">
+        <div className="mt-8 grid gap-8 md:mt-10 md:grid-cols-[2fr_1fr] md:gap-10">
           <RevealText as="p" delay={120} className="text-lg leading-relaxed md:text-xl" style={{ color: "var(--muted)" }}>
             Shipped features end-to-end across React, Next.js, Node.js, and
             MySQL - from database design to deployment - for a commercial
@@ -82,33 +82,35 @@ export default function AboutPage() {
               className="flex flex-col gap-3 text-sm md:items-end md:text-right"
               style={{ color: "var(--muted)" }}
             >
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-                <MapPin size={15} /> Albay, Philippines
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin size={15} className="shrink-0" /> Albay, Philippines
               </span>
               <a
                 href="mailto:anzelbotin@gmail.com"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--accent)]"
               >
-                <Mail size={15} /> anzelbotin@gmail.com
+                <Mail size={15} className="shrink-0" /> anzelbotin@gmail.com
               </a>
               <a
                 href="tel:+639274910531"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--accent)]"
               >
-                <Phone size={15} /> +63 927 491 0531
+                <Phone size={15} className="shrink-0" /> +63 927 491 0531
               </a>
-              <a
-                href="https://linkedin.com/in/anzelbotin"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
-              >
-                <ExternalLink size={15} /> LinkedIn
-              </a>
-              <a
-                href="https://github.com/BAILANN-ctrl"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
-              >
-                <GitHubGlyph size={15} /> GitHub
-              </a>
+              <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2 md:justify-end">
+                <a
+                  href="https://linkedin.com/in/anzelbotin"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--accent)]"
+                >
+                  <ExternalLink size={15} className="shrink-0" /> LinkedIn
+                </a>
+                <a
+                  href="https://github.com/BAILANN-ctrl"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--accent)]"
+                >
+                  <GitHubGlyph size={15} /> GitHub
+                </a>
+              </div>
             </div>
           </RevealText>
         </div>
@@ -116,29 +118,29 @@ export default function AboutPage() {
 
       {/* Section — experience timeline */}
       <div
-        className="border-t py-16 md:py-24"
+        className="border-t py-10 md:py-24"
         style={{ borderColor: "var(--border)" }}
       >
-        <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+        <div className="grid gap-6 md:grid-cols-[200px_1fr] md:gap-12">
           <h2 className="font-display text-2xl tracking-tight md:sticky md:top-8 md:self-start">
             Experience
           </h2>
-          <div className="space-y-16">
+          <div className="space-y-10 md:space-y-16">
             {experience.map((job) => (
               <div key={job.role + job.org}>
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-xl font-medium md:text-2xl">
+                <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-x-4">
+                  <h3 className="text-base font-medium leading-snug sm:text-xl md:text-2xl">
                     {job.role} <span style={{ color: "var(--accent)" }}>/</span> {job.org}
                   </h3>
-                  <span className="text-sm" style={{ color: "var(--muted)" }}>
+                  <span className="text-sm whitespace-nowrap" style={{ color: "var(--muted)" }}>
                     {job.period}
                   </span>
                 </div>
-                <p className="text-sm" style={{ color: "var(--muted)" }}>
+                <p className="mt-1.5 text-sm" style={{ color: "var(--muted)" }}>
                   {job.location}
                 </p>
                 <ul
-                  className="mt-4 list-disc space-y-2 pl-5 text-base"
+                  className="mt-3 list-disc space-y-1.5 pl-4 text-sm leading-relaxed sm:mt-4 sm:pl-5 sm:text-base"
                   style={{ color: "var(--muted)" }}
                 >
                   {job.bullets.map((b) => (
@@ -153,27 +155,27 @@ export default function AboutPage() {
 
       {/* Education + Certifications */}
       <div
-        className="border-t py-16 md:py-24"
+        className="border-t py-10 md:py-24"
         style={{ borderColor: "var(--border)" }}
       >
-        <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+        <div className="grid gap-6 md:grid-cols-[200px_1fr] md:gap-12">
           <h2 className="font-display text-2xl tracking-tight md:sticky md:top-8 md:self-start">
             Education <span style={{ color: "var(--accent)" }}>&amp;</span> Certifications
           </h2>
           <div>
-            <h3 className="text-xl font-medium">BS in Information Technology</h3>
-            <p className="text-base" style={{ color: "var(--muted)" }}>
+            <h3 className="text-lg font-medium sm:text-xl">BS in Information Technology</h3>
+            <p className="mt-1 text-base" style={{ color: "var(--muted)" }}>
               STI College Legazpi
             </p>
             <p className="mt-2 text-base" style={{ color: "var(--muted)" }}>
               Former President&apos;s Lister <span style={{ color: "var(--accent)" }}>/</span> National Finalist, Essay Does It
               2024
             </p>
-            <div className="mt-10 space-y-4">
+            <div className="mt-8 space-y-4 sm:mt-10">
               {certifications.map((cert) => (
                 <div key={cert.name}>
-                  <h3 className="text-lg font-medium">{cert.name}</h3>
-                  <p className="text-base" style={{ color: "var(--muted)" }}>
+                  <h3 className="text-base font-medium sm:text-lg">{cert.name}</h3>
+                  <p className="mt-1 text-base" style={{ color: "var(--muted)" }}>
                     {cert.issuer}
                   </p>
                   <p className="text-base" style={{ color: "var(--muted)" }}>
@@ -188,18 +190,18 @@ export default function AboutPage() {
 
       {/* Skills — asymmetric bento */}
       <div
-        className="border-t py-16 md:py-24"
+        className="border-t py-10 md:py-24"
         style={{ borderColor: "var(--border)" }}
       >
-        <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+        <div className="grid gap-6 md:grid-cols-[200px_1fr] md:gap-12">
           <h2 className="font-display text-2xl tracking-tight md:sticky md:top-8 md:self-start">
             Skills
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {Object.entries(skills).map(([category, items], i) => (
               <div
                 key={category}
-                className="p-8"
+                className="p-5 sm:p-8"
                 style={{
                   background: "rgba(255,255,255,0.03)",
                   border: "1px solid var(--border)",
@@ -212,7 +214,7 @@ export default function AboutPage() {
                 >
                   {category}
                 </h3>
-                <ul className="mt-5 space-y-2 text-base">
+                <ul className="mt-4 space-y-2 text-base">
                   {items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
@@ -223,10 +225,10 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-12 border-t pt-10" style={{ borderColor: "var(--border)" }}>
+      <div className="mt-10 border-t pt-8 md:mt-12 md:pt-10" style={{ borderColor: "var(--border)" }}>
         <a
           href="/Resume - Botin, Anzel Victor F.pdf"
-          className="group btn-primary"
+          className="group btn-primary w-full justify-center md:w-auto"
         >
           Download resume
           <span

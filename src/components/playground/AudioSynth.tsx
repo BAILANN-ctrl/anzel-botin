@@ -137,11 +137,27 @@ export default function AudioSynth() {
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
+  const handleTouchStart = useCallback(
+    (note: (typeof NOTES)[number]) => (e: React.TouchEvent) => {
+      e.preventDefault();
+      playNote(note);
+    },
+    [playNote],
+  );
+
+  const handleTouchEnd = useCallback(
+    (key: string) => (e: React.TouchEvent) => {
+      e.preventDefault();
+      stopNote(key);
+    },
+    [stopNote],
+  );
+
   return (
     <div className="flex h-full flex-col gap-3">
       <canvas
         ref={canvasRef}
-        className="h-20 w-full flex-shrink-0"
+        className="h-24 max-h-32 w-full flex-shrink-0 sm:h-20"
         style={{ borderRadius: 8 }}
       />
       <div className="flex flex-1 gap-1">
@@ -155,8 +171,12 @@ export default function AudioSynth() {
               onMouseLeave={() => {
                 if (activeOscRef.current.has(note.key)) stopNote(note.key);
               }}
+              onTouchStart={handleTouchStart(note)}
+              onTouchEnd={handleTouchEnd(note.key)}
+              onTouchCancel={handleTouchEnd(note.key)}
               className="relative flex flex-1 flex-col items-center justify-end rounded-lg pb-2 transition-all duration-150 select-none"
               style={{
+                touchAction: "none",
                 background: isActive
                   ? "rgba(52, 211, 153, 0.2)"
                   : "rgba(255, 255, 255, 0.03)",
@@ -182,7 +202,7 @@ export default function AudioSynth() {
         className="font-mono text-[10px] uppercase tracking-[0.2em]"
         style={{ color: "var(--muted)" }}
       >
-        Keys [A-K] or click
+        Keys [A-K] or tap
       </span>
     </div>
   );

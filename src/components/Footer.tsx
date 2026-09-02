@@ -32,38 +32,41 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Nav */}
-        <div className="flex flex-col gap-2">
-          <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-            Site
-          </span>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm transition-colors hover:text-[var(--accent)]"
-              style={{ color: "var(--muted)" }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+        {/* Site + Connect side by side on mobile, stacked as columns on desktop */}
+        <div className="grid grid-cols-2 gap-8 md:col-span-2 md:grid-cols-2">
+          {/* Nav */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+              Site
+            </span>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm transition-colors hover:text-[var(--accent)]"
+                style={{ color: "var(--muted)" }}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-        {/* Socials */}
-        <div className="flex flex-col gap-2">
-          <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-            Connect
-          </span>
-          {socials.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              className="text-sm transition-colors hover:text-[var(--accent)]"
-              style={{ color: "var(--muted)" }}
-            >
-              {social.label}
-            </a>
-          ))}
+          {/* Socials */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+              Connect
+            </span>
+            {socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                className="text-sm transition-colors hover:text-[var(--accent)]"
+                style={{ color: "var(--muted)" }}
+              >
+                {social.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

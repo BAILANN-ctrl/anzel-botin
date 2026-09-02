@@ -141,13 +141,12 @@ export default function PixelArt() {
       onPointerLeave={onPointerUp}
     >
       <div
-        className="grid select-none"
+        className="grid w-full max-w-[min(280px,100%)] select-none"
         style={{
           gridTemplateColumns: `repeat(${GRID}, 1fr)`,
           gap: 1,
-          width: "100%",
-          maxWidth: 280,
           aspectRatio: "1",
+          touchAction: "none",
         }}
       >
         {pixels.map((row, r) =>
@@ -170,7 +169,7 @@ export default function PixelArt() {
           )),
         )}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         <ToolButton
           active={tool === "brush"}
           onClick={() => setTool("brush")}
@@ -189,7 +188,7 @@ export default function PixelArt() {
           title="Fill (F)"
           icon="▣"
         />
-        <div className="mx-1 h-4 w-px bg-white/10" />
+        <div className="mx-1 hidden h-4 w-px bg-white/10 sm:block" />
         {COLORS.map((c, i) => (
           <button
             key={c}
@@ -197,7 +196,7 @@ export default function PixelArt() {
               setBrush(c);
               setTool("brush");
             }}
-            className="h-4 w-4 rounded-full transition-transform duration-200 hover:scale-125"
+            className="h-6 w-6 min-h-[24px] min-w-[24px] rounded-full transition-transform duration-200 hover:scale-125 sm:h-4 sm:w-4"
             style={{
               background: c,
               border:
@@ -209,7 +208,7 @@ export default function PixelArt() {
             title={`Color ${i + 1} (${i + 1})`}
           />
         ))}
-        <div className="mx-1 h-4 w-px bg-white/10" />
+        <div className="mx-1 hidden h-4 w-px bg-white/10 sm:block" />
         <button
           onClick={undo}
           className="font-mono text-[9px] uppercase tracking-[0.15em] transition-colors hover:text-[var(--accent)]"
@@ -244,7 +243,7 @@ function ToolButton({
     <button
       onClick={onClick}
       title={title}
-      className="flex h-5 w-5 items-center justify-center rounded text-[10px] transition-colors hover:text-[var(--accent)]"
+      className="flex h-7 w-7 items-center justify-center rounded text-[10px] transition-colors hover:text-[var(--accent)] sm:h-5 sm:w-5"
       style={{
         color: active ? "var(--accent)" : "var(--muted)",
         boxShadow: active ? "inset 0 0 0 1px var(--accent)" : "none",

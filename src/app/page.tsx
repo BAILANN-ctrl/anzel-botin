@@ -30,11 +30,11 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="relative grid min-h-[100dvh] items-center px-6 pt-28 md:px-14 lg:grid-cols-[1fr_480px] lg:px-20">
           {/* Left: Copy */}
-          <div className="flex flex-col justify-center pb-20 lg:pb-0">
+          <div className="flex flex-col justify-center pb-20 lg:pb-0 mt-8 md:mt-0">
             <RevealText
               as="h1"
               delay={0}
-              className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] leading-[0.95] tracking-[-0.04em] pb-1"
+              className="font-display text-[clamp(2.5rem,9vw,5rem)] leading-[0.95] tracking-[-0.04em] pb-1 md:text-[clamp(1.75rem,4.5vw,3.75rem)]"
             >
               I build clean,
               <br />

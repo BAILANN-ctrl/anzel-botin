@@ -54,8 +54,8 @@ export default function ContactForm() {
 
   return (
     <div className="glass-panel p-1.5">
-      <form ref={formRef} onSubmit={handleSubmit} className="glass-inner space-y-8 p-6 md:p-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <form ref={formRef} onSubmit={handleSubmit} className="glass-inner space-y-6 p-5 md:p-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* Left column: Name + Email */}
           <div className="space-y-5">
             <div>
@@ -116,7 +116,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
           <button
             type="submit"
             disabled={status === "sending"}

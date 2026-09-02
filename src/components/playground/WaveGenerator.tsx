@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Ripple {
   x: number;
@@ -16,6 +16,11 @@ export default function WaveGenerator() {
   const timeRef = useRef(0);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
   const ripplesRef = useRef<Ripple[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,6 +38,12 @@ export default function WaveGenerator() {
     resize();
     window.addEventListener("resize", resize);
 
+    const spawnRipple = (x: number, y: number) => {
+      const rect = canvas.getBoundingClientRect();
+      const maxRadius = Math.max(rect.width, rect.height) * 0.6;
+      ripplesRef.current.push({ x, y, radius: 0, maxRadius, life: 1 });
+    };
+
     const onMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current.x = e.clientX - rect.left;
@@ -46,15 +57,33 @@ export default function WaveGenerator() {
 
     const onClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const maxRadius = Math.max(rect.width, rect.height) * 0.6;
-      ripplesRef.current.push({ x, y, radius: 0, maxRadius, life: 1 });
+      spawnRipple(e.clientX - rect.left, e.clientY - rect.top);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      mouseRef.current.x = touch.clientX - rect.left;
+      mouseRef.current.y = touch.clientY - rect.top;
+      mouseRef.current.active = true;
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.changedTouches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        spawnRipple(touch.clientX - rect.left, touch.clientY - rect.top);
+      }
+      mouseRef.current.active = false;
     };
 
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mouseleave", onMouseLeave);
     canvas.addEventListener("click", onClick);
+    canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+    canvas.addEventListener("touchstart", onTouchMove, { passive: false });
+    canvas.addEventListener("touchend", onTouchEnd);
 
     const draw = () => {
       const rect = canvas.getBoundingClientRect();
@@ -159,6 +188,9 @@ export default function WaveGenerator() {
       canvas.removeEventListener("mousemove", onMouseMove);
       canvas.removeEventListener("mouseleave", onMouseLeave);
       canvas.removeEventListener("click", onClick);
+      canvas.removeEventListener("touchmove", onTouchMove);
+      canvas.removeEventListener("touchstart", onTouchMove);
+      canvas.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 
@@ -177,7 +209,7 @@ export default function WaveGenerator() {
           className="font-mono text-[10px] uppercase tracking-[0.2em]"
           style={{ color: "var(--muted)" }}
         >
-          Move to distort · Click for ripples
+          {isMobile ? "Drag to distort · Tap for ripples" : "Move to distort · Click for ripples"}
         </span>
       </div>
     </div>

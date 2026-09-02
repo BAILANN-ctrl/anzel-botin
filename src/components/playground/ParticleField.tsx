@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Particle {
   x: number;
@@ -17,6 +17,11 @@ export default function ParticleField() {
   const mouseRef = useRef({ x: 0, y: 0, active: false });
   const particlesRef = useRef<Particle[]>([]);
   const rafRef = useRef<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,16 +39,11 @@ export default function ParticleField() {
     resize();
     window.addEventListener("resize", resize);
 
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current.x = e.clientX - rect.left;
-      mouseRef.current.y = e.clientY - rect.top;
-      mouseRef.current.active = true;
-
+    const spawnAt = (x: number, y: number) => {
       for (let i = 0; i < 3; i++) {
         particlesRef.current.push({
-          x: mouseRef.current.x + (Math.random() - 0.5) * 10,
-          y: mouseRef.current.y + (Math.random() - 0.5) * 10,
+          x: x + (Math.random() - 0.5) * 10,
+          y: y + (Math.random() - 0.5) * 10,
           vx: (Math.random() - 0.5) * 2,
           vy: (Math.random() - 0.5) * 2 - 1,
           life: 1,
@@ -53,12 +53,37 @@ export default function ParticleField() {
       }
     };
 
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current.x = e.clientX - rect.left;
+      mouseRef.current.y = e.clientY - rect.top;
+      mouseRef.current.active = true;
+      spawnAt(mouseRef.current.x, mouseRef.current.y);
+    };
+
     const onMouseLeave = () => {
+      mouseRef.current.active = false;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      mouseRef.current.x = touch.clientX - rect.left;
+      mouseRef.current.y = touch.clientY - rect.top;
+      mouseRef.current.active = true;
+      spawnAt(mouseRef.current.x, mouseRef.current.y);
+    };
+
+    const onTouchEnd = () => {
       mouseRef.current.active = false;
     };
 
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mouseleave", onMouseLeave);
+    canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+    canvas.addEventListener("touchstart", onTouchMove, { passive: false });
+    canvas.addEventListener("touchend", onTouchEnd);
 
     const spawnAmbient = () => {
       const rect = canvas.getBoundingClientRect();
@@ -144,6 +169,9 @@ export default function ParticleField() {
       window.removeEventListener("resize", resize);
       canvas.removeEventListener("mousemove", onMouseMove);
       canvas.removeEventListener("mouseleave", onMouseLeave);
+      canvas.removeEventListener("touchmove", onTouchMove);
+      canvas.removeEventListener("touchstart", onTouchMove);
+      canvas.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 
@@ -162,7 +190,7 @@ export default function ParticleField() {
           className="font-mono text-[10px] uppercase tracking-[0.2em]"
           style={{ color: "var(--muted)" }}
         >
-          Move cursor to interact
+          {isMobile ? "Tap and drag to interact" : "Move cursor to interact"}
         </span>
       </div>
     </div>

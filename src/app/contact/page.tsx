@@ -7,7 +7,7 @@ import ContactForm from "@/components/ContactForm";
 export default function ContactPage() {
   return (
     <div className="px-6 pt-28 pb-8 md:px-14 md:pt-32 lg:px-20">
-      <div className="grid gap-16 md:grid-cols-[1fr_1.2fr] md:gap-20">
+      <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-20">
         {/* Left: editorial headline + quick options */}
         <div>
           <RevealText
@@ -23,10 +23,10 @@ export default function ContactPage() {
           </RevealText>
 
           <RevealText as="div" delay={200}>
-            <div className="mt-10 flex flex-col gap-4 md:items-start">
+            <div className="mt-8 flex flex-col gap-3 md:mt-10 md:items-start">
               <a
                 href="mailto:anzelbotin@gmail.com"
-                className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-all hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm transition-all hover:border-[var(--accent)] hover:text-[var(--accent)] md:justify-start md:px-4 md:py-2"
                 style={{ borderColor: "var(--border)", color: "var(--muted)" }}
               >
                 <Mail size={14} />
@@ -34,14 +34,14 @@ export default function ContactPage() {
               </a>
               <a
                 href="https://linkedin.com/in/anzelbotin"
-                className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-all hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm transition-all hover:border-[var(--accent)] hover:text-[var(--accent)] md:justify-start md:px-4 md:py-2"
                 style={{ borderColor: "var(--border)", color: "var(--muted)" }}
               >
                 <ExternalLink size={14} />
                 LinkedIn
               </a>
               <span
-                className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm"
+                className="inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm md:justify-start md:px-4"
                 style={{ borderColor: "var(--border)", color: "var(--muted)" }}
               >
                 <MapPin size={14} />

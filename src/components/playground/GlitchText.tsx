@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const GLITCH_CHARS = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`01";
 
@@ -10,6 +10,11 @@ export default function GlitchText() {
   const [text, setText] = useState("GLITCH");
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const originalRef = useRef("GLITCH");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const startGlitch = useCallback(
     (target: string) => {
@@ -72,6 +77,8 @@ export default function GlitchText() {
         className="group cursor-default select-none"
         onMouseEnter={() => startGlitch("PLAYGROUND")}
         onMouseLeave={stopGlitch}
+        onTouchStart={() => startGlitch("PLAYGROUND")}
+        onTouchEnd={stopGlitch}
       >
         <span
           className="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight"
@@ -88,7 +95,7 @@ export default function GlitchText() {
           className="font-mono text-[10px] uppercase tracking-[0.2em]"
           style={{ color: "var(--muted)" }}
         >
-          Hover to scramble
+          {isMobile ? "Tap to scramble" : "Hover to scramble"}
         </span>
         <div className="flex gap-1">
           {DOT_OACITIES.map((o, i) => (
