@@ -56,176 +56,183 @@ const certifications = [
   },
 ];
 
-function Section({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      className="border-t py-12 md:grid md:grid-cols-[180px_1fr] md:gap-10"
-      style={{ borderColor: "var(--border)" }}
-    >
-      <h2 className="font-display text-2xl md:sticky md:top-8 md:self-start">
-        {label}
-      </h2>
-      <div className="mt-6 md:mt-0">{children}</div>
-    </div>
-  );
-}
-
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-8 md:px-10">
-      {/* Intro */}
-      <div className="grid gap-6 pb-10 md:grid-cols-[1fr_auto] md:items-start">
-        <div>
-          <RevealText
-            as="p"
-            className="text-xs font-medium uppercase tracking-[0.2em]"
-            style={{ color: "var(--accent)" }}
-          >
-            About
-          </RevealText>
-          <RevealText as="h1" delay={80} className="font-display mt-4 text-4xl leading-tight md:text-5xl">
-            Full-stack developer, three years in production.
-          </RevealText>
-          <RevealText as="p" delay={160} className="mt-6 text-lg leading-relaxed md:max-w-xl" style={{ color: "var(--muted)" }}>
+    <div className="px-6 pt-28 pb-8 md:px-14 md:pt-32 lg:px-20">
+      {/* Intro — full-bleed, asymmetric split */}
+      <div className="pb-20 md:pb-28">
+        <RevealText
+          as="h1"
+          delay={0}
+          className="font-display max-w-4xl text-[clamp(2.5rem,5.5vw,5rem)] leading-[1] tracking-[-0.03em]"
+        >
+          Full-stack developer,
+          <br />
+          three years in production.
+        </RevealText>
+        <div className="mt-10 grid gap-10 md:grid-cols-[2fr_1fr]">
+          <RevealText as="p" delay={120} className="text-lg leading-relaxed md:text-xl" style={{ color: "var(--muted)" }}>
             Shipped features end-to-end across React, Next.js, Node.js, and
             MySQL - from database design to deployment - for a commercial
             studio and a regional government office. Comfortable owning a
             feature independently and communicating progress clearly.
           </RevealText>
+          <RevealText as="div" delay={200}>
+            <div
+              className="flex flex-col gap-3 text-sm md:items-end md:text-right"
+              style={{ color: "var(--muted)" }}
+            >
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+                <MapPin size={15} /> Albay, Philippines
+              </span>
+              <a
+                href="mailto:anzelbotin@gmail.com"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+              >
+                <Mail size={15} /> anzelbotin@gmail.com
+              </a>
+              <a
+                href="tel:+639274910531"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+              >
+                <Phone size={15} /> +63 927 491 0531
+              </a>
+              <a
+                href="https://linkedin.com/in/anzelbotin"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+              >
+                <ExternalLink size={15} /> LinkedIn
+              </a>
+              <a
+                href="https://github.com/BAILANN-ctrl"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
+              >
+                <GitHubGlyph size={15} /> GitHub
+              </a>
+            </div>
+          </RevealText>
         </div>
-
-        <RevealText as="div" delay={240}>
-          <div
-            className="flex flex-wrap gap-x-5 gap-y-3 text-sm md:flex-col md:items-end md:text-right"
-            style={{ color: "var(--muted)" }}
-          >
-            <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
-              <MapPin size={15} /> Albay, Philippines
-            </span>
-            <a
-              href="mailto:anzelbotin@gmail.com"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
-            >
-              <Mail size={15} /> anzelbotin@gmail.com
-            </a>
-            <a
-              href="tel:+639274910531"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
-            >
-              <Phone size={15} /> +63 927 491 0531
-            </a>
-            <a
-              href="https://linkedin.com/in/anzelbotin"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
-            >
-              <ExternalLink size={15} /> LinkedIn
-            </a>
-            <a
-              href="https://github.com/BAILANN-ctrl"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap transition-colors hover:text-[var(--accent)]"
-            >
-              <GitHubGlyph size={15} /> GitHub
-            </a>
-          </div>
-        </RevealText>
       </div>
 
-      {/* Experience */}
-      <Section label="Experience">
-        <div className="space-y-10">
-          {experience.map((job) => (
-            <div key={job.role + job.org}>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="font-medium">
-                  {job.role} <span style={{ color: "var(--accent)" }}>/</span> {job.org}
-                </h3>
-                <span className="text-sm" style={{ color: "var(--muted)" }}>
-                  {job.period}
-                </span>
+      {/* Section — experience timeline */}
+      <div
+        className="border-t py-16 md:py-24"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+          <h2 className="font-display text-2xl tracking-tight md:sticky md:top-8 md:self-start">
+            Experience
+          </h2>
+          <div className="space-y-16">
+            {experience.map((job) => (
+              <div key={job.role + job.org}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-xl font-medium md:text-2xl">
+                    {job.role} <span style={{ color: "var(--accent)" }}>/</span> {job.org}
+                  </h3>
+                  <span className="text-sm" style={{ color: "var(--muted)" }}>
+                    {job.period}
+                  </span>
+                </div>
+                <p className="text-sm" style={{ color: "var(--muted)" }}>
+                  {job.location}
+                </p>
+                <ul
+                  className="mt-4 list-disc space-y-2 pl-5 text-base"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {job.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
               </div>
-              <p className="text-sm" style={{ color: "var(--muted)" }}>
-                {job.location}
-              </p>
-              <ul
-                className="mt-3 list-disc space-y-1.5 pl-5 text-sm"
-                style={{ color: "var(--muted)" }}
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Education + Certifications */}
+      <div
+        className="border-t py-16 md:py-24"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+          <h2 className="font-display text-2xl tracking-tight md:sticky md:top-8 md:self-start">
+            Education <span style={{ color: "var(--accent)" }}>&amp;</span> Certifications
+          </h2>
+          <div>
+            <h3 className="text-xl font-medium">BS in Information Technology</h3>
+            <p className="text-base" style={{ color: "var(--muted)" }}>
+              STI College Legazpi
+            </p>
+            <p className="mt-2 text-base" style={{ color: "var(--muted)" }}>
+              Former President&apos;s Lister <span style={{ color: "var(--accent)" }}>/</span> National Finalist, Essay Does It
+              2024
+            </p>
+            <div className="mt-10 space-y-4">
+              {certifications.map((cert) => (
+                <div key={cert.name}>
+                  <h3 className="text-lg font-medium">{cert.name}</h3>
+                  <p className="text-base" style={{ color: "var(--muted)" }}>
+                    {cert.issuer}
+                  </p>
+                  <p className="text-base" style={{ color: "var(--muted)" }}>
+                    {cert.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Skills — asymmetric bento */}
+      <div
+        className="border-t py-16 md:py-24"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-12">
+          <h2 className="font-display text-2xl tracking-tight md:sticky md:top-8 md:self-start">
+            Skills
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {Object.entries(skills).map(([category, items], i) => (
+              <div
+                key={category}
+                className="p-8"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid var(--border)",
+                  borderRadius: i === 0 ? "1.75rem" : "1.25rem",
+                }}
               >
-                {job.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                <h3
+                  className="text-xs font-medium uppercase tracking-[0.15em]"
+                  style={{ color: "var(--accent)" }}
+                >
+                  {category}
+                </h3>
+                <ul className="mt-5 space-y-2 text-base">
+                  {items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </Section>
-
-      {/* Education */}
-      <Section label="Education">
-        <h3 className="font-medium">BS in Information Technology</h3>
-        <p className="text-sm" style={{ color: "var(--muted)" }}>
-          STI College Legazpi
-        </p>
-        <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-          Former President&apos;s Lister <span style={{ color: "var(--accent)" }}>/</span> National Finalist, Essay Does It
-          2024
-        </p>
-      </Section>
-
-      {/* Skills */}
-      <Section label="Skills">
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-3">
-          {Object.entries(skills).map(([category, items]) => (
-            <div key={category}>
-              <h3
-                className="text-xs font-medium uppercase tracking-[0.15em]"
-                style={{ color: "var(--accent)" }}
-              >
-                {category}
-              </h3>
-              <ul className="mt-3 space-y-1.5 text-sm">
-                {items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Certifications */}
-      <Section label="Certifications">
-        <div className="space-y-4">
-          {certifications.map((cert) => (
-            <div key={cert.name}>
-              <h3 className="font-medium">{cert.name}</h3>
-              <p className="text-sm" style={{ color: "var(--muted)" }}>
-                {cert.issuer}
-              </p>
-              <p className="text-sm" style={{ color: "var(--muted)" }}>
-                {cert.detail}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
+      </div>
 
       <div className="mt-12 border-t pt-10" style={{ borderColor: "var(--border)" }}>
         <a
           href="/Resume - Botin, Anzel Victor F.pdf"
-          className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg"
-          style={{
-            background: "var(--accent)",
-            boxShadow: "0 4px 24px -4px var(--accent)",
-          }}
+          className="group btn-primary"
         >
           Download resume
-          <span className="inline-block transition-transform group-hover:translate-x-0.5">
+          <span
+            className="inline-flex h-7 w-7 items-center justify-center rounded-full transition-transform duration-500 group-hover:translate-x-0.5"
+            style={{ background: "rgba(5,5,10,0.15)" }}
+          >
             &rarr;
           </span>
         </a>

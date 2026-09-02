@@ -35,12 +35,7 @@ export default async function ProjectDetail({
 
       <div className="mx-auto max-w-6xl px-5 pt-16 pb-8 sm:px-6 md:pt-24 md:pb-12">
         <div className="max-w-3xl">
-          <p
-            className="text-xs font-medium uppercase tracking-[0.2em]"
-            style={{ color: "var(--accent)" }}
-          >
-            {project.role ?? "Project"}
-          </p>
+          <span className="eyebrow">{project.role ?? "Project"}</span>
           <h1 className="font-display mt-3 text-3xl leading-tight md:text-5xl">
             {project.name}
           </h1>
@@ -90,11 +85,7 @@ export default async function ProjectDetail({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm text-white transition-all hover:scale-[1.02] hover:shadow-lg"
-                style={{
-                  background: "var(--accent)",
-                  boxShadow: "0 4px 24px -4px var(--accent)",
-                }}
+                className="group btn-primary"
               >
                 <ArrowUpRight size={16} /> Visit site
               </a>

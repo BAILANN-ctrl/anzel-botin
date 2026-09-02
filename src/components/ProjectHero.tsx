@@ -56,11 +56,14 @@ export default function ProjectHero({
         {/* Back button */}
         <Link
           href="/projects"
-          className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all hover:scale-[1.02] md:left-6 md:top-6 md:px-4 md:py-2 md:text-sm"
+          className="absolute left-4 inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-all hover:scale-[1.02] md:left-6 md:px-4 md:py-2 md:text-sm"
           style={{
+            top: "5rem",
             color: "var(--ink)",
-            background: "var(--bg)",
-            border: "1px solid var(--border)",
+            background: "rgba(5,5,10,0.6)",
+            border: "1px solid var(--border-strong)",
+            WebkitBackdropFilter: "blur(12px)",
+            backdropFilter: "blur(12px)",
           }}
         >
           <ArrowLeft size={14} /> All Projects

@@ -49,7 +49,6 @@ export default function MagneticButton({
       className={className}
       style={{
         ...style,
-        display: "inline-block",
         x: springX,
         y: springY,
       }}

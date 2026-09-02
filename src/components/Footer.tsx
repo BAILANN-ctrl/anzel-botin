@@ -1,39 +1,78 @@
+import Link from "next/link";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Work" },
+  { href: "/playground", label: "Playground" },
+  { href: "/contact", label: "Contact" },
+];
+
+const socials = [
+  { label: "LinkedIn", href: "https://linkedin.com/in/anzelbotin" },
+  { label: "GitHub", href: "https://github.com/BAILANN-ctrl" },
+  { label: "Email", href: "mailto:anzelbotin@gmail.com" },
+];
+
 export default function Footer() {
   return (
     <footer
-      className="border-t px-6 py-10 md:py-12"
-      style={{ borderColor: "var(--border)" }}
+      className="px-6 py-16 md:px-14 md:py-24 lg:px-20"
+      style={{ borderTop: "1px solid var(--border)" }}
     >
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-        <div className="flex flex-col gap-1">
-          <span className="font-display text-sm">Anzel Victor F. Botin</span>
-          <span className="text-xs" style={{ color: "var(--muted)" }}>
-            Built with Next.js &middot; {new Date().getFullYear()}
+      <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr] md:gap-8">
+        {/* Name + tagline */}
+        <div className="flex flex-col gap-3">
+          <span className="font-display text-2xl md:text-3xl tracking-tight">
+            Anzel Victor F. Botin<span style={{ color: "var(--accent)" }}>.</span>
           </span>
+          <p className="max-w-xs text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+            Full-stack developer building production web applications with
+            React, Next.js, Node.js, and MySQL.
+          </p>
         </div>
-        <div className="flex gap-6">
-          <a
-            href="https://linkedin.com/in/anzelbotin"
-            className="text-sm transition-colors hover:text-[var(--accent)]"
-            style={{ color: "var(--muted)" }}
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/BAILANN-ctrl"
-            className="text-sm transition-colors hover:text-[var(--accent)]"
-            style={{ color: "var(--muted)" }}
-          >
-            GitHub
-          </a>
-          <a
-            href="mailto:anzelbotin@gmail.com"
-            className="text-sm transition-colors hover:text-[var(--accent)]"
-            style={{ color: "var(--muted)" }}
-          >
-            Email
-          </a>
+
+        {/* Nav */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+            Site
+          </span>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm transition-colors hover:text-[var(--accent)]"
+              style={{ color: "var(--muted)" }}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
+
+        {/* Socials */}
+        <div className="flex flex-col gap-2">
+          <span className="text-[10px] font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+            Connect
+          </span>
+          {socials.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              className="text-sm transition-colors hover:text-[var(--accent)]"
+              style={{ color: "var(--muted)" }}
+            >
+              {social.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="mt-16 flex flex-col items-center justify-between gap-3 pt-6 text-xs md:flex-row"
+        style={{ borderTop: "1px solid var(--border)", color: "var(--muted)" }}
+      >
+        <span>Built with Next.js</span>
+        <span>&copy; {new Date().getFullYear()} Anzel Victor F. Botin</span>
       </div>
     </footer>
   );

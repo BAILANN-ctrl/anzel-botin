@@ -26,43 +26,50 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero - Asymmetric Split */}
-      <section className="relative overflow-hidden px-6 pt-8 md:px-10 md:pt-8">
-        <div className="mx-auto grid min-h-[calc(85vh-6rem)] max-w-7xl items-center gap-10 md:grid-cols-[1fr_420px] md:gap-16 lg:grid-cols-[1fr_480px]">
+      {/* Hero — full-bleed, left-aligned, massive type */}
+      <section className="relative overflow-hidden">
+        <div className="relative grid min-h-[100dvh] items-center px-6 pt-28 md:px-14 lg:grid-cols-[1fr_480px] lg:px-20">
           {/* Left: Copy */}
-          <div className="flex flex-col justify-center">
-            <RevealText
-              as="p"
-              className="text-xs font-medium uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              Full-stack developer
-            </RevealText>
-
+          <div className="flex flex-col justify-center pb-20 lg:pb-0">
             <RevealText
               as="h1"
-              delay={80}
-              className="font-display mt-6 max-w-2xl text-4xl leading-[1.05] sm:text-5xl md:text-6xl"
+              delay={0}
+              className="font-display text-[clamp(1.75rem,4.5vw,3.75rem)] leading-[0.95] tracking-[-0.04em] pb-1"
             >
-              I build clean, considered
+              I build clean,
+              <br />
+              considered
               <br />
               <span className="relative inline-flex items-baseline">
-                {typed}
+                <span
+                  className="inline-block"
+                  style={{
+                    background:
+                      "linear-gradient(120deg, var(--accent), #7dd3fc)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  {typed}
+                </span>
                 <span
                   aria-hidden
-                  className="ml-1 inline-block h-[0.9em] w-[2px]"
+                  className="ml-3 inline-block h-[0.8em] w-[0.03em] rounded-full"
                   style={{
                     background: "var(--accent)",
+                    boxShadow: "0 0 14px var(--accent)",
                     animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
                   }}
                 />
               </span>
-              , end to end.
+              ,<br />
+              end to end.
             </RevealText>
 
-            <RevealText as="div" delay={160}>
+            <RevealText as="div" delay={120}>
               <p
-                className="mt-8 max-w-lg text-lg leading-relaxed"
+                className="mt-8 max-w-md text-lg leading-relaxed md:text-xl"
                 style={{ color: "var(--muted)" }}
               >
                 Building production web applications end-to-end with React,
@@ -70,103 +77,123 @@ export default function Home() {
               </p>
             </RevealText>
 
-            <RevealText as="div" delay={240}>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <RevealText as="div" delay={200}>
+              <div className="mt-10 flex flex-wrap items-center gap-4">
                 <MagneticButton
                   href="/projects"
-                  className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg"
-                  style={{
-                    background: "var(--accent)",
-                    boxShadow: "0 4px 24px -4px var(--accent)",
-                  }}
+                  data-cursor-hover
+                  className="btn-primary group"
                 >
                   View my work
-                  <span className="inline-block transition-transform group-hover:translate-x-0.5">
-                    &rarr;
+                  <span
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-px group-hover:translate-x-0.5"
+                    style={{ background: "rgba(5,5,10,0.15)" }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </span>
                 </MagneticButton>
                 <MagneticButton
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-medium transition-all hover:border-[var(--ink)]"
-                  style={{ borderColor: "var(--border)" }}
+                  data-cursor-hover
+                  className="btn-secondary group"
                 >
                   Get in touch
+                  <span
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-px group-hover:translate-x-0.5"
+                    style={{ background: "rgba(255,255,255,0.1)" }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                      <path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
                 </MagneticButton>
               </div>
             </RevealText>
           </div>
 
-          {/* Right: Code Hero */}
-          <RevealText as="div" delay={120} className="hidden justify-center md:flex">
+          {/* Right: Code Hero — offset for asymmetric tension */}
+          <RevealText
+            as="div"
+            delay={140}
+            className="hidden items-center justify-center lg:flex lg:translate-x-6 lg:pr-4"
+          >
             <CodeHero />
           </RevealText>
         </div>
+
+        {/* Full-bleed scroll cue */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-6 flex items-center justify-center gap-2 text-[10px] uppercase tracking-[0.25em]"
+          style={{ color: "var(--muted)" }}
+          aria-hidden
+        >
+          <span>Scroll</span>
+          <span className="h-px w-8" style={{ background: "var(--border-strong)" }} />
+        </div>
       </section>
 
-      {/* Tech Stack Strip */}
-      <section className="border-y px-6 py-8 md:px-10 md:py-10" style={{ borderColor: "var(--border)" }}>
-        <div className="mx-auto max-w-7xl">
-          <RevealText as="p" className="text-center text-xs font-medium uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
-            Tools I work with
-          </RevealText>
-          <RevealText as="div" delay={80}>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-5 md:gap-x-14">
-              {TECH_STACK.map((tech) => (
-                <div
-                  key={tech.slug}
-                  className="flex items-center gap-2.5 transition-colors hover:text-[var(--accent)]"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`https://cdn.simpleicons.org/${tech.slug}/currentColor`}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="opacity-70 transition-opacity hover:opacity-100"
-                  />
-                  <span className="text-sm font-medium">{tech.name}</span>
-                </div>
-              ))}
+      {/* Tech Stack — infinite marquee, no panel */}
+      <section className="marquee-wrap py-16 md:py-20">
+        <div className="marquee-track">
+          {[...TECH_STACK, ...TECH_STACK].map((tech, i) => (
+            <div
+              key={`${tech.slug}-${i}`}
+              className="flex items-center gap-3"
+              style={{ color: "var(--muted)" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://cdn.simpleicons.org/${tech.slug}/currentColor`}
+                alt=""
+                width={22}
+                height={22}
+                className="opacity-80"
+              />
+              <span className="font-display whitespace-nowrap text-2xl tracking-tight">
+                {tech.name}
+              </span>
             </div>
-          </RevealText>
+          ))}
         </div>
       </section>
 
       {/* Signature scroll-pinned work strip */}
       <WorkStrip projects={featured} />
 
-      {/* Closing CTA */}
-      <section
-        className="relative overflow-hidden px-6 py-20 text-center md:px-10 md:py-32"
-        style={{ background: "var(--surface-tint)" }}
-      >
-        <div className="relative">
-          <RevealText as="h2" className="font-display text-3xl md:text-4xl">
-            Have a role or project in mind?
+      {/* Closing CTA — left-aligned, editorial */}
+      <section className="relative overflow-hidden px-6 py-40 md:px-14 md:py-56 lg:px-20">
+        <div className="max-w-6xl">
+          <RevealText
+            as="h2"
+            delay={0}
+            className="font-display text-[clamp(1.5rem,3vw,2.5rem)] leading-[1] tracking-[-0.03em]"
+          >
+            Have a role or
+            <br />
+            project in mind?
           </RevealText>
-          <RevealText as="div" delay={80}>
+          <RevealText as="div" delay={120}>
             <p
-              className="mx-auto mt-4 max-w-md text-base"
+              className="mt-8 max-w-md text-lg leading-relaxed"
               style={{ color: "var(--muted)" }}
             >
               I&apos;m always interested in hearing about new projects and
-              opportunities.
+              opportunities. Let&apos;s make something considered.
             </p>
           </RevealText>
-          <RevealText as="div" delay={160}>
-            <div className="mt-8 flex justify-center">
-              <MagneticButton
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg"
-                style={{
-                  background: "var(--accent)",
-                  boxShadow: "0 4px 24px -4px var(--accent)",
-                }}
-              >
+          <RevealText as="div" delay={200}>
+            <div className="mt-12">
+              <MagneticButton href="/contact" data-cursor-hover className="btn-primary group px-8 py-4">
                 Start a project
-                <span className="inline-block transition-transform group-hover:translate-x-0.5">
-                  &rarr;
+                <span
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-px group-hover:translate-x-0.5"
+                  style={{ background: "rgba(5,5,10,0.15)" }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </span>
               </MagneticButton>
             </div>

@@ -81,7 +81,7 @@ function SyntaxHighlight({ text }: { text: string }) {
           );
         if (token.startsWith('"'))
           return (
-            <span key={i} style={{ color: "#8ab4f8" }}>
+            <span key={i} style={{ color: "#7dd3fc" }}>
               {token}
             </span>
           );
@@ -125,25 +125,19 @@ export default function CodeHero() {
       className="relative h-[420px] w-[336px] cursor-default lg:h-[480px] lg:w-[384px]"
     >
       <div
-        className="absolute -inset-3 rounded-3xl opacity-15 blur-xl"
-        style={{ background: "var(--accent)" }}
+        className="absolute -inset-4 rounded-[2rem] opacity-20 blur-2xl"
+        style={{ background: "radial-gradient(circle at 30% 20%, var(--glow-1), transparent 70%)" }}
       />
 
-      <div
-        className="relative flex h-full w-full flex-col overflow-hidden rounded-3xl border transition-shadow duration-300 hover:shadow-xl"
-        style={{
-          borderColor: "var(--border)",
-          background: "var(--bg-raised)",
-          boxShadow: "0 8px 32px -8px rgba(0,0,0,0.12)",
-        }}
-      >
+      <div className="glass-panel relative flex h-full w-full flex-col overflow-hidden p-1.5">
+        {/* Header bar */}
         <div
-          className="flex items-center gap-2 border-b px-4 py-3"
-          style={{ borderColor: "var(--border)" }}
+          className="flex items-center gap-2 px-4 py-3"
+          style={{ borderBottom: "1px solid var(--border)" }}
         >
-          <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-          <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-          <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+          <span className="h-3 w-3 rounded-full bg-[#ff5f56]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#ffbd2e]/80" />
+          <span className="h-3 w-3 rounded-full bg-[#27c93f]/80" />
           <span
             className="ml-2 font-mono text-[11px]"
             style={{ color: "var(--muted)" }}
@@ -157,7 +151,7 @@ export default function CodeHero() {
             <div key={i} className="flex gap-3">
               <span
                 className="select-none text-right text-[11px] leading-relaxed"
-                style={{ color: "var(--muted)", width: "1.2em", opacity: 0.5 }}
+                style={{ color: "var(--muted)", width: "1.2em", opacity: 0.4 }}
               >
                 {i + 1}
               </span>
@@ -172,12 +166,15 @@ export default function CodeHero() {
         </div>
 
         <div
-          className="flex items-center justify-between border-t px-5 py-3.5"
-          style={{ borderColor: "var(--border)" }}
+          className="flex items-center justify-between px-5 py-3.5"
+          style={{ borderTop: "1px solid var(--border)" }}
         >
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1.5">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="relative inline-flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </span>
               <span
                 className="text-[11px] font-medium"
                 style={{ color: "var(--muted)" }}

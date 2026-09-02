@@ -3,42 +3,58 @@ import Image from "next/image";
 import { ArrowUpRight, GitFork } from "lucide-react";
 import type { Project } from "@/data/projects";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project, fullWidth }: { project: Project; fullWidth?: boolean }) {
   const thumbnail = project.images?.[0] ?? null;
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl border transition-all duration-300 hover:border-[var(--ink)] hover:shadow-lg"
+      className="group relative overflow-hidden p-1.5 transition-all duration-500"
       style={{
-        borderColor: "var(--border)",
-        background: "var(--bg-raised)",
+        borderRadius: "1.75rem",
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.09)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), var(--shadow-card)",
+        WebkitBackdropFilter: "blur(20px)",
+        backdropFilter: "blur(20px)",
       }}
     >
       {/* Thumbnail */}
       {thumbnail && (
-        <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <div
+          className="relative overflow-hidden"
+          style={{
+            borderRadius: "calc(1.75rem - 0.375rem)",
+            aspectRatio: fullWidth ? "21/9" : "16/10",
+          }}
+        >
           <Image
             src={thumbnail}
             alt={`${project.name} preview`}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            sizes="(max-width: 640px) 100vw, 50vw"
+            sizes={fullWidth ? "100vw" : "(max-width: 640px) 100vw, 50vw"}
           />
           <div
             className="absolute inset-0 transition-opacity duration-300"
             style={{
-              background: `linear-gradient(to top, var(--bg-raised) 0%, transparent 40%)`,
+              background: "linear-gradient(to top, #0b0b13 0%, transparent 40%)",
             }}
           />
         </div>
       )}
 
-      <div className="p-6">
+      <div
+        className="p-6 md:p-8"
+        style={{
+          borderRadius: "calc(1.75rem - 0.375rem)",
+          background: "rgba(5,5,10,0.55)",
+        }}
+      >
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <Link
               href={`/projects/${project.slug}`}
-              className="font-display text-xl transition-colors hover:text-[var(--accent)]"
+              className="font-display text-xl transition-colors hover:text-[var(--accent)] md:text-2xl"
             >
               {project.name}
             </Link>
@@ -47,7 +63,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                 {project.role}
               </p>
             )}
-            <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed md:text-base" style={{ color: "var(--muted)" }}>
               {project.oneLiner}
             </p>
           </div>
@@ -79,7 +95,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.stack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border px-3 py-1 text-xs transition-colors group-hover:border-[var(--border)]"
+              className="rounded-full border px-3 py-1 text-xs transition-colors"
               style={{ borderColor: "var(--border)", color: "var(--muted)" }}
             >
               {tech}

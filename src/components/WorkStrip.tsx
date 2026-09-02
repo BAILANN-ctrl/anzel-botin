@@ -119,18 +119,19 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
           style={{ width: "250vmax", ...fallbackStyle }}
         >
           {/* Intro panel */}
-          <div className="flex h-full w-[80vw] shrink-0 flex-col justify-center px-6 md:w-[45vw] md:px-16">
-            <p
-              className="text-xs font-medium uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              Portfolio
-            </p>
-            <h2 className="font-display mt-4 text-3xl leading-tight md:text-6xl">
+          <div className="flex h-full w-[85vw] shrink-0 flex-col justify-center px-6 md:w-[42vw] md:px-16">
+            <span className="eyebrow">Portfolio</span>
+            <h2 className="font-display mt-5 text-4xl leading-[1.05] md:text-7xl">
               Selected
               <br />
               work.
             </h2>
+            <p
+              className="mt-6 max-w-xs text-base leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              A rotating reel of systems I&apos;ve shipped, pinned to scroll.
+            </p>
           </div>
 
           {/* Project panels */}
@@ -142,9 +143,25 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                 className="flex h-full w-[85vw] shrink-0 items-center px-4 md:w-[55vw] md:px-10"
               >
                 <div
-                  className="relative flex h-[65vh] w-full flex-col justify-between overflow-hidden rounded-2xl p-6 md:h-[70vh] md:p-12"
-                  style={{ background: project.color }}
+                  className="relative flex h-[65vh] w-full flex-col justify-between overflow-hidden p-1.5 md:h-[70vh]"
+                  style={{
+                    borderRadius: "2rem",
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), var(--shadow-deep)",
+                    WebkitBackdropFilter: "blur(24px)",
+                    backdropFilter: "blur(24px)",
+                  }}
                 >
+                  <div
+                    className="relative flex h-full w-full flex-col justify-between overflow-hidden"
+                    style={{
+                      borderRadius: "calc(2rem - 0.375rem)",
+                      background: `linear-gradient(150deg, ${project.color} 0%, #0a0a12 160%)`,
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15)",
+                    }}
+                  >
                   {/* Background thumbnail if available */}
                   {thumbnail && (
                     <div className="absolute inset-0 z-0">
@@ -152,21 +169,21 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                         src={thumbnail}
                         alt=""
                         fill
-                        className="object-cover opacity-20"
+                        className="object-cover opacity-15"
                         sizes="55vw"
                       />
                       <div
                         className="absolute inset-0"
                         style={{
-                          background: `linear-gradient(135deg, ${project.color}ee, ${project.color}cc)`,
+                          background: `linear-gradient(150deg, ${project.color}f2 0%, rgba(10,10,18,0.85) 80%)`,
                         }}
                       />
                     </div>
                   )}
 
-                  <div className="relative z-10 flex items-start justify-between">
+                  <div className="relative z-10 flex items-start justify-between p-6 md:p-10">
                     {project.role && (
-                      <span className="rounded-full border border-white/30 px-3 py-1 text-[11px] uppercase tracking-wider text-white/80 md:text-xs">
+                      <span className="rounded-full border border-white/25 bg-black/20 px-3 py-1 text-[11px] uppercase tracking-wider text-white/90 backdrop-blur-sm md:text-xs">
                         {project.role}
                       </span>
                     )}
@@ -174,7 +191,7 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                       {project.repoUrl && (
                         <a
                           href={project.repoUrl}
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-all hover:bg-white/25 hover:scale-110 md:h-10 md:w-10"
+                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-all hover:bg-white/25 hover:scale-110 md:h-11 md:w-11"
                           aria-label={`View ${project.name} repository`}
                         >
                           <GitFork size={16} />
@@ -183,7 +200,7 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                       {project.liveUrl && (
                         <a
                           href={project.liveUrl}
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-all hover:bg-white/25 hover:scale-110 md:h-10 md:w-10"
+                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-all hover:bg-white/25 hover:scale-110 md:h-11 md:w-11"
                           aria-label={`Visit ${project.name}`}
                         >
                           <ArrowUpRight size={16} />
@@ -192,7 +209,7 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                     </div>
                   </div>
 
-                  <div className="relative z-10">
+                  <div className="relative z-10 p-6 md:p-10">
                     <h3 className="font-display text-2xl text-white md:text-4xl">
                       {project.name}
                     </h3>
@@ -203,7 +220,7 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                       {project.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-full border border-white/25 px-2.5 py-0.5 text-[11px] text-white/90 md:px-3 md:py-1 md:text-xs"
+                          className="rounded-full border border-white/25 bg-black/20 px-3 py-1 text-[11px] text-white/90 backdrop-blur-sm md:text-xs"
                         >
                           {tech}
                         </span>
@@ -211,10 +228,11 @@ export default function WorkStrip({ projects }: { projects: Project[] }) {
                     </div>
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="mt-5 inline-flex items-center gap-1.5 text-sm text-white underline underline-offset-4 transition-colors hover:text-white/80 md:mt-6"
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white md:mt-6"
                     >
                       View project
                     </Link>
+                  </div>
                   </div>
                 </div>
               </div>
